@@ -36,14 +36,14 @@ conflict-free hedge.
 
 | Order | File | What it is |
 |---|---|---|
-| 1 | `documents/Enel_Beachhead_Review.html` | Six openings weighed, the regulatory window, the specification for study one, and the five things that have to be written first. |
-| 2 | `council/Council_Brief_Beachhead_2026-08-17.md` | The brief putting the four acts in front of the 28 July channel doctrine. |
-| 2 | `council/Council_Record_2026-08-17.md` | The doctrine argued in three collisions, and the Executor's sequenced plan with owners and dates. |
-| 3 | `documents/Enel_Beachhead_Review_II.html` | The three legal tiers of the peptide market, written on the Quicksilver Scientific point. Corrects the earlier claim that peptides cannot pay. |
-| 4 | `documents/Enel_Evidence_Map.html` | What replicates and what does not, with two charts. The one document that stands mostly on cited public literature. |
-| 5 | `documents/Enel_Beachhead_Transcript.html` | The full discussion, verbatim on both sides. |
+| 1 | `Enel_Beachhead_Review.html` | Six openings weighed, the regulatory window, the specification for study one, and the five things that have to be written first. |
+| 2 | `Council_Brief_Beachhead_2026-08-17.md` | The brief putting the four acts in front of the 28 July channel doctrine. |
+| 2 | `Council_Record_2026-08-17.md` | The doctrine argued in three collisions, and the Executor's sequenced plan with owners and dates. |
+| 3 | `Enel_Beachhead_Review_II.html` | The three legal tiers of the peptide market, written on the Quicksilver Scientific point. Corrects the earlier claim that peptides cannot pay. |
+| 4 | `Enel_Evidence_Map.html` | What replicates and what does not, with two charts. The one document that stands mostly on cited public literature. |
+| 5 | `Enel_Beachhead_Transcript.html` | The full discussion, verbatim on both sides. |
 
-Open any HTML file directly in a browser. Each carries its own light and dark theme and its sources
+Files sit at the repository root. Open any HTML file directly in a browser. Each carries its own light and dark theme and its sources
 at the foot.
 
 ## What changed during the work, and is left in the record
