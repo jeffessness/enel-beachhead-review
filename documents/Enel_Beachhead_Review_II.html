@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ēnel Health · The Legal Lane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@300..500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1b26'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23d8c28a' text-anchor='middle'%3EĒ%3C/text%3E%3C/svg%3E">
+<style>
+  :root, :root[data-theme="dark"]{
+    color-scheme:dark;
+    --navy:#0d1b26; --navy2:#122733; --navy3:#183340; --navy4:#1f3d4c;
+    --ink:#f4f6f7; --ink-dim:rgba(244,246,247,.72); --ink-faint:#8d99a2;
+    --gold:#8d6d32; --gold-bright:#d8c28a; --gold-soft:#bfa46a;
+    --blue:#7da2e8; --teal:#5cb2aa;
+    --line:rgba(244,246,247,.13); --line2:rgba(244,246,247,.07);
+    --green:#69bd8c; --amber:#d8b06a; --red:#cf6b60; --violet:#9f96d0;
+    --bar-bg:rgba(13,27,38,.9); --shadow:rgba(0,0,0,.5);
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Geist','Geist Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:'Geist Mono','IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  :root[data-theme="light"]{
+    color-scheme:light;
+    --navy:#f4f6f7; --navy2:#ffffff; --navy3:#eaeef0; --navy4:#dfe5e8;
+    --ink:#0d1b26; --ink-dim:#47535c; --ink-faint:#69737b;
+    --gold:#7a5e28; --gold-bright:#8d6d32; --gold-soft:#8d6d32;
+    --blue:#2c55c9; --teal:#2c726c;
+    --line:rgba(13,27,38,.14); --line2:rgba(13,27,38,.08);
+    --green:#2e7d52; --amber:#7c5e14; --red:#a8362b; --violet:#5a4f96;
+    --bar-bg:rgba(244,246,247,.92); --shadow:rgba(40,46,64,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.24}
+  a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--line)}
+  a:hover{border-bottom-color:var(--gold-bright)}
+  .bar{position:sticky;top:0;z-index:50;background:var(--bar-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:1140px;margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:22px}
+  .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em}
+  .brand span{color:var(--gold-bright)}
+  .bar nav{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+  .bar nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);border:none}
+  .bar nav a:hover{color:var(--gold-bright)}
+  .tgl{background:transparent;border:1px solid var(--line);color:var(--ink-faint);border-radius:999px;padding:6px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .tgl:hover{color:var(--gold-bright);border-color:var(--gold-soft)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  .col{max-width:760px}
+  section{padding:60px 0;border-top:1px solid var(--line2)}
+  section:first-of-type{border-top:none}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
+  h1{font-size:clamp(33px,5.2vw,55px);letter-spacing:-.012em}
+  h2{font-size:clamp(25px,3.3vw,35px);margin-bottom:18px;letter-spacing:-.008em}
+  h3{font-size:21px;margin:32px 0 10px}
+  h4{font-size:17.5px;margin:24px 0 8px;font-family:var(--sans);font-weight:600}
+  p{margin-bottom:17px;color:var(--ink-dim)}
+  p.lede{font-size:19.5px;color:var(--ink);line-height:1.55}
+  strong{color:var(--ink);font-weight:600}
+  .hero{padding:70px 0 52px;background:
+    radial-gradient(1050px 500px at 8% -18%, rgba(92,178,170,.12), transparent 62%),
+    radial-gradient(880px 540px at 108% 112%, rgba(141,109,50,.16), transparent 62%)}
+  .hero .stamp{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold-soft);border-radius:999px;padding:6px 15px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:24px}
+  .hero .sub{font-family:var(--serif);font-size:clamp(19px,2.4vw,25px);color:var(--ink-dim);font-style:italic;margin:20px 0 26px;max-width:730px}
+  .meta{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding-top:22px;border-top:1px solid var(--line)}
+  .panel{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:25px 27px;margin:26px 0}
+  .panel.gold{background:linear-gradient(158deg,var(--navy2),rgba(141,109,50,.13))}
+  .panel.teal{background:linear-gradient(158deg,var(--navy2),rgba(92,178,170,.11))}
+  .panel.warn{background:linear-gradient(158deg,var(--navy2),rgba(207,107,96,.12))}
+  .panel h3,.panel h4{margin-top:0}
+  .panel p:last-child{margin-bottom:0}
+  .pull{font-family:var(--serif);font-size:22px;line-height:1.45;color:var(--ink);margin:30px 0}
+  .tw{overflow-x:auto;margin:28px 0;border:1px solid var(--line);border-radius:16px}
+  table{width:100%;border-collapse:collapse;background:var(--navy2);min-width:660px}
+  th,td{padding:14px 17px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line2);font-size:14.5px}
+  thead th{background:var(--navy3);font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);font-weight:400}
+  tbody td{color:var(--ink-dim)}
+  tbody td:first-child{color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+  .t-ok{color:var(--green);border-color:rgba(105,189,140,.4)}
+  .t-mid{color:var(--amber);border-color:rgba(216,176,106,.4)}
+  .t-no{color:var(--red);border-color:rgba(207,107,96,.4)}
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:30px 0}
+  .tier{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:24px 25px;display:flex;flex-direction:column}
+  .tier .tn{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:9px}
+  .tier h3{margin:0 0 10px;font-size:20px}
+  .tier p{font-size:14.6px}
+  .tier dl{margin:0;font-size:14px}
+  .tier dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin-top:12px}
+  .tier dd{color:var(--ink-dim);margin-top:3px}
+  .tier .foot{margin-top:auto;padding-top:15px;border-top:1px solid var(--line2);font-size:13.8px;color:var(--ink)}
+  ul,ol{margin:0 0 18px 22px;color:var(--ink-dim)}
+  li{margin-bottom:9px}
+  li strong{color:var(--ink)}
+  .note{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:var(--ink-faint);line-height:1.6;margin-top:14px}
+  .srclist{font-size:13.8px;color:var(--ink-dim)}
+  .srclist li{margin-bottom:11px}
+  .srclist b{color:var(--ink);font-weight:600}
+  footer{border-top:1px solid var(--line);padding:38px 0 64px;color:var(--ink-faint);font-size:13.5px}
+  @media (max-width:720px){body{font-size:16px}section{padding:46px 0}.bar nav{display:none}.panel{padding:21px}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span>Ē</span>NEL &nbsp;·&nbsp; The legal lane</div>
+  <nav>
+    <a href="#correction">The correction</a>
+    <a href="#tiers">Three tiers</a>
+    <a href="#unlock">What it unlocks</a>
+    <a href="#study">The study now</a>
+    <a href="#hazard">The hazard</a>
+    <a href="#changes">What changes</a>
+    <a href="#sources">Sources</a>
+  </nav>
+  <button class="tgl" id="tgl">Light</button>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <div class="stamp">Internal · 17 August 2026 · companion to the beachhead review</div>
+  <div class="col">
+    <h1>A lawful peptide lane exists, and it is worth more to the design than to the revenue line.</h1>
+    <p class="sub">Written on your Quicksilver Scientific point. The instinct is right, the example sits on the wrong side of the line, and following it properly produces a better study than the one I proposed yesterday.</p>
+  </div>
+  <div class="meta">
+    <div>Supersedes section 05 of the beachhead review</div>
+    <div>Earlier file kept unedited</div>
+    <div>Not legal advice</div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<section id="correction">
+  <div class="col">
+    <div class="eyebrow">01 · Two corrections, mine and the example's</div>
+    <h2>I was too broad. Quicksilver is not the case that proves it.</h2>
+    <p class="lede">Yesterday I wrote that peptides cannot pay you, because their sellers cannot lawfully advertise efficacy. That is right about injectable grey-market compounds and wrong as a statement about peptides, which was the claim I actually made. There is a large, unambiguously lawful peptide economy with real brands and real marketing budgets, and I should have separated it.</p>
+    <p>Collagen peptides alone are somewhere between two and three and a quarter billion dollars in 2026 and are sold by companies with proper marketing functions, including Vital Proteins, Rousselot, Gelita and PB Leiner. Topical cosmetic peptides sit in the same lawful position. Bioactive milk and whey peptides, lactoferrin, carnosine and glutathione are all sold as ordinary supplements. Those brands can advertise with substantiation, and they can buy validation.</p>
+    <p>The second correction is to the example. Quicksilver Scientific does sell a liposomal BPC-157, openly, through mainstream supplement retailers. Open is not the same as lawful. The FDA's position is that BPC-157 is not a dietary ingredient and cannot lawfully be included in a dietary supplement, and the Department of Defense's supplement-safety programme describes it plainly as a prohibited peptide and an unapproved drug found in wellness products. In late 2023 the agency put it on the Category 2 bulk substances list on safety grounds.</p>
+    <p>The liposomal argument does not do the work it is being asked to do. Whether something is a dietary ingredient turns on the identity of the article under the statute, not on how it is delivered. Binding a peptide to fat changes absorption, not classification. So a company selling oral BPC-157 as a food supplement is running a legal theory the agency has already rejected, and it is doing so in a year when the agency is actively reexamining what counts as a dietary substance.</p>
+    <p class="pull">The useful discovery is not that Quicksilver is legal. It is that the category has three legal tiers, nobody publishes which tier a product sits in, and a consumer cannot tell them apart in a shopping cart.</p>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="col">
+    <div class="eyebrow">02 · The structure neither of us had written down</div>
+    <h2>Three tiers, one category</h2>
+  </div>
+  <div class="tiers">
+    <div class="tier">
+      <div class="tn">Tier one</div>
+      <h3>Lawful and settled</h3>
+      <p>Peptides that are genuine dietary substances or cosmetic ingredients. Collagen peptides and hydrolysates, milk and whey bioactives, lactoferrin, carnosine, glutathione, and the topical cosmetic peptides.</p>
+      <dl>
+        <dt>Who sells it</dt><dd>Real brands with marketing budgets and retail distribution.</dd>
+        <dt>Can it be advertised</dt><dd>Yes, with substantiation to the FTC standard.</dd>
+        <dt>Can Ēnel assign a protocol</dt><dd>Yes, for structure and function endpoints, with no investigational filing.</dd>
+      </dl>
+      <div class="foot"><span class="tag t-ok">Payable</span> The register lane, and it is inside the peptide story rather than beside it.</div>
+    </div>
+    <div class="tier">
+      <div class="tn">Tier two</div>
+      <h3>Contested and openly sold</h3>
+      <p>Synthetic peptides sold as supplements where the agency disputes dietary-ingredient status. Oral and liposomal BPC-157, TB-500 blends, and their relatives. Quicksilver Scientific sits here.</p>
+      <dl>
+        <dt>Who sells it</dt><dd>Established supplement companies taking a legal position, plus a long tail taking none.</dd>
+        <dt>Can it be advertised</dt><dd>Structure-function claims are made, and the underlying lawfulness is contested.</dd>
+        <dt>Can Ēnel assign a protocol</dt><dd>No. Treat as an unapproved drug until the question is settled.</dd>
+      </dl>
+      <div class="foot"><span class="tag t-mid">Observe only</span> The most interesting research question in the category, and the one product Ēnel must never sell a listing to.</div>
+    </div>
+    <div class="tier">
+      <div class="tn">Tier three</div>
+      <h3>Unapproved drugs</h3>
+      <p>The injectables. BPC-157, TB-500, KPV, MOTS-c, Semax, Epitalon from compounders and research-chemical resellers. The six the committee voted on in July.</p>
+      <dl>
+        <dt>Who sells it</dt><dd>Compounding pharmacies, licensed telehealth, and grey-market resellers.</dd>
+        <dt>Can it be advertised</dt><dd>No efficacy claims are available at all.</dd>
+        <dt>Can Ēnel assign a protocol</dt><dd>No. Strictly observational, as set out yesterday.</dd>
+      </dl>
+      <div class="foot"><span class="tag t-no">Not payable</span> Earns the record, the docket position and the standing.</div>
+    </div>
+  </div>
+  <div class="col">
+    <p>Two live regulatory currents make this structure unstable in a way that favours moving early. The agency reversed itself on NMN in September 2025 and declared it lawful in supplements. The trade bodies have petitioned it to change course on drug preclusion, the clause that bars an ingredient once it has been investigated as a drug. And the agency is reexamining what a dietary substance is, with peptides named as the emerging case that tests the boundary. The tier a product sits in this year is not necessarily the tier it sits in next year, and the party holding the evidence when the line moves is the party the line moves around.</p>
+  </div>
+</section>
+
+<section id="unlock">
+  <div class="col">
+    <div class="eyebrow">03 · What the legal lane unlocks</div>
+    <h2>A randomised arm on day one, which is what the plan was missing</h2>
+    <p>My observational-only rule was correct for tier three and over-broad applied to the whole category. A lawfully marketed dietary supplement studied for structure and function endpoints, rather than to treat or prevent disease, is not an investigational-drug matter. So in tier one Ēnel can assign a protocol and randomise from the first cohort.</p>
+    <p>That fixes the weakest joint in yesterday's plan. The FTC's guidance holds that a health-benefit claim generally needs randomised controlled human evidence, which meant the thing a brand could buy did not exist until a randomised arm existed, which I had sitting in act two on ordinary supplement categories, separate from the story. It does not have to be separate. It can be a randomised arm on a collagen peptide or a topical peptide, inside the same master protocol whose tier three stratum is observational, published together.</p>
+    <div class="panel teal">
+      <h4>And it makes the science better, which is the part worth arguing</h4>
+      <p>A randomised tier one arm is a legitimate active comparator for a tier three observational stratum. The paper writes itself: here is what a lawful peptide does under randomisation, and here is what the injectable version does in people who chose it for themselves, measured the same way, on the same instruments, over the same window. Neither half is publishable alone at this stage. Together they are the first thing anybody has put into this evidence gap, and the comparison is exactly the one the rulemaking docket has no data on.</p>
+    </div>
+    <h3>It also solves recruitment without asking anybody's permission</h3>
+    <p>Tier one brands have customer lists and retail relationships. A collagen or topical peptide brand inviting its own buyers into a study is organic recruitment that needs no forum moderator and no paid social, which puts it squarely inside the channel doctrine. That is a second route alongside search, and it arrives with a commercial relationship attached rather than a favour asked.</p>
+  </div>
+</section>
+
+<section id="study">
+  <div class="col">
+    <div class="eyebrow">04 · The study I would now lead with</div>
+    <h2>Does the oral version do anything at all</h2>
+    <p>This is the question the tier structure hands you, and it is better than the one I proposed yesterday.</p>
+    <p>Peptides are degraded by digestion. That is the whole reason an injectable market exists. Whether a liposomal oral preparation delivers any meaningful systemic peptide is unresolved, and an entire retail segment is being sold on the assumption that it does. Nobody has measured it in the people buying it.</p>
+    <div class="panel gold">
+      <h4>Why this is the strongest single study available to Ēnel right now</h4>
+      <ul>
+        <li><strong>It is unanswered</strong>, and it is unanswered in the direction that matters to a shopper standing in front of two products at very different prices.</li>
+        <li><strong>It is cheap</strong>, because the participants already bought the product and are already taking it.</li>
+        <li><strong>It has a lawful comparator</strong> in tier one and a self-selected comparator in tier three, so the design has three arms without Ēnel supplying anything.</li>
+        <li><strong>It matters whichever way it lands.</strong> If oral delivers nothing, Ēnel has published the most useful consumer-protection finding in the category. If it delivers something, Ēnel has legitimised a lane and every brand in it needs the record.</li>
+        <li><strong>No legitimate seller is harmed by asking it</strong>, which is the test the selection rule should apply to every study.</li>
+      </ul>
+    </div>
+    <p>Add to it the supply-source question from yesterday, which now gets sharper. Record what tier each participant's product is in, where they bought it, and what they paid. A consumer buying oral BPC-157 at a supplement retailer and a consumer buying injectable BPC-157 from a reseller believe they are buying the same thing. They are not, and nobody has ever told them.</p>
+  </div>
+</section>
+
+<section id="hazard">
+  <div class="col">
+    <div class="eyebrow">05 · The hazard this creates</div>
+    <h2>A score on a tier two product turns your mark into a warranty of legality</h2>
+    <p class="lede">This is worth more attention than the opportunity, because it is the failure mode that arrives free with the good news.</p>
+    <p>Tier two sellers have the most to gain from an Ēnel score and the weakest claim on one. They are established enough to pay, sophisticated enough to read the governance framework and not ask for a favourable result, and sitting on a legal theory the agency has rejected. They will come first, they will come with money, and nothing currently written stops them.</p>
+    <p>The first time the agency acts against a product carrying an Ēnel score, the story is not that the score was wrong. It is that Ēnel scored an unapproved drug. That single sentence undoes the register, the mark, the consumer surface and the raise, and no amount of correctness about the underlying measurement repairs it.</p>
+    <div class="panel warn">
+      <h4>The clause to add to the selection rule due 23 August</h4>
+      <p>Ēnel makes its own documented determination of a product's regulatory tier before that product may hold a listing, an arm or a mark, and never accepts the submitter's assertion of lawfulness. No listing, arm or mark is sold to a tier two product at any price. Tier two products may be observed and reported on, and being observed confers nothing. The tier is published on the entry, with the date of the determination and what it rests on.</p>
+    </div>
+    <p>Note what that clause does beyond protecting you. Publishing the tier is a product nobody offers. A shopper cannot currently tell whether the peptide in their cart is a settled food ingredient, a contested one, or an unapproved drug wearing a supplement label. Telling them costs Ēnel nothing, is useful on the first day, and is the kind of finding that makes the case for the register better than any argument about validation fees.</p>
+    <p>One more consequence, and it is the reason to write the clause this month. The Contrarian's month-fourteen scenario, in which a well-capitalised firm buys the queue rather than the verdict, arrives earlier than expected and from a direction nobody planned for. It arrives as a tier two brand offering to fund the study of its own category, and every request it makes will be admissible under every rule currently written down.</p>
+  </div>
+</section>
+
+<section id="changes">
+  <div class="col">
+    <div class="eyebrow">06 · What this changes in the argument</div>
+    <h2>Line by line, against yesterday</h2>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Yesterday's position</th><th>Now</th></tr></thead>
+    <tbody>
+      <tr><td>Peptides cannot pay you.</td><td>Too broad. Tier three cannot. Tier one can, and collagen alone is a two to three billion dollar market with real brands.</td></tr>
+      <tr><td>Two beachheads: peptides for standing, ordinary supplements for revenue.</td><td>One beachhead, three tiers, one master protocol. The paying lane is inside the peptide story rather than beside it, which is simpler to run and better to tell.</td></tr>
+      <tr><td>Strictly observational throughout.</td><td>Strictly observational in tiers two and three. Assignable and randomisable in tier one, for structure and function endpoints.</td></tr>
+      <tr><td>The randomised arm a brand buys waits for act two.</td><td>It exists in the first cohort, which is what the FTC standard requires and what makes the register saleable earlier.</td></tr>
+      <tr><td>In peptides the buyer is the channel, not the brand.</td><td>Still true for tier three, and now joined by tier one brands who are ordinary customers of a validation product.</td></tr>
+      <tr><td>Recruitment runs through search and forum permission.</td><td>Add tier one brand customer lists, which need no gatekeeper and sit inside the channel doctrine.</td></tr>
+      <tr><td>The selection rule needs a queue clause.</td><td>It needs a queue clause and a tier clause, and the tier clause is the more urgent of the two.</td></tr>
+      <tr><td>Act two's three categories to be chosen by 24 August.</td><td>Choose them inside the peptide category. Collagen or topical peptides are the obvious first two, and the third should be whichever tier one peptide the atlas already grades highest.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="col">
+    <h3>What I found in the platform demo, since you asked</h3>
+    <p>The demo runs sixty-five screens across ten chapters, from the problem through consumer, participant, researcher, brand submission, marketplace, business model and a due-diligence chapter. Two things in its data are relevant here.</p>
+    <p>Its six illustrative studies are creatine and cognition, red light therapy for sleep, ashwagandha and cortisol, NMN and longevity markers, magnesium for sleep, and electrolytes in girls thirteen to seventeen. Every one of them is tier one or a device. The demo already imagines the lawful register lane, and it does not have a peptide study in the list. Separately, its peptide participant cards name BPC-157, TB-500, Selank and GHK-Cu, so the peptide portal was already anticipated with named compounds. The two halves have simply never been joined, and the tier structure is what joins them.</p>
+    <p>The known defects in that file stand and are already corrected in the REV01 version: the study cards carry cash compensation of $200 to $300, which contradicts the never-pay-to-enrol rule, and its dataset panel shows longitudinal records with tens of thousands of participants spanning 2020 to 2025, which are illustrative and cannot be shown to anyone as real.</p>
+    <p class="note">Read for this note: the platform demo data structures, both council records, the canon, the market potential review, the note to you, deck v35, and the front-door and library memory record. Not yet read: the money briefs, the five-year model report, the brand flywheel, communities and researcher prototypes, the thesis, the twenty-five-studies file, and the atlas compare view. Say the word and I will work through those before the next pass.</p>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="col">
+    <div class="eyebrow">07 · Sources</div>
+    <h2>What this rests on</h2>
+    <ul class="srclist">
+      <li><b>BPC-157 is not a dietary ingredient.</b> <a href="https://www.opss.org/article/bpc-157-prohibited-peptide-and-unapproved-drug-found-health-and-wellness-products">Operation Supplement Safety, a prohibited peptide and an unapproved drug found in health and wellness products</a>, and <a href="https://www.bscg.org/blogs/single/bpc-157-peptide-benefits-safety-legal-status-and-research">BSCG on legal status</a>. Legal risk to sellers set out by <a href="https://djholtlaw.com/understanding-the-legal-risks-of-bpc-157-and-other-unapproved-peptides/">Holt Law</a>.</li>
+      <li><b>The product in question.</b> Quicksilver Scientific's <a href="https://www.professionalsupplementcenter.com/products/liposomal-bpc-157-by-quicksilver-scientific">Liposomal BPC-157</a>, sold through mainstream supplement retail.</li>
+      <li><b>Drug preclusion and the dietary-substance reexamination.</b> <a href="https://www.nutraceuticalsworld.com/exclusives/clause-e-under-the-microscope-fda-reexamines-the-boundaries-of-dietary-ingredients/">Nutraceuticals World on FDA reexamining the boundaries</a>, <a href="https://www.crnusa.org/drug-preclusion">CRN on drug preclusion</a>, and <a href="https://www.nutraingredients.com/Article/2025/09/30/fda-declares-nmn-lawful-in-dietary-supplements/">the NMN reversal of September 2025</a>.</li>
+      <li><b>The lawful lane's size.</b> Collagen peptide market estimates for 2026 and the named producers, from <a href="https://www.fortunebusinessinsights.com/collagen-peptides-market-112516">Fortune Business Insights</a> and <a href="https://www.mordorintelligence.com/industry-reports/collagen-peptides-market">Mordor Intelligence</a>. Treated as indicative.</li>
+      <li><b>Substantiation standard.</b> <a href="https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance">FTC Health Products Compliance Guidance</a>.</li>
+      <li><b>Investigational-drug boundary.</b> <a href="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-D/part-312">21 CFR Part 312</a>, and the point that a supplement studied for a disease effect may itself be an investigational new drug, per <a href="https://regardd.org/drugs/is-my-study-exempt">the exemption guidance</a>.</li>
+      <li><b>Internal.</b> `EnelHealth_PlatformDemo_v30_3_1.html` data structures, CR-2026-08-16-01, CR-2026-08-17-01, canon REV01-849M, the beachhead review of 17 August.</li>
+    </ul>
+    <p class="note">Not legal advice. The tier determinations described here are exactly the thing counsel has to own, and the clause proposed for the selection rule should be drafted by a regulatory lawyer rather than adopted from this page.</p>
+  </div>
+</section>
+
+<footer><div class="col">
+  <p>Ēnel Health, internal. 17 August 2026. Companion to `Enel_Beachhead_Review.html`, which is kept unedited. Where the two disagree, this one is later.</p>
+</div></footer>
+
+</div>
+
+<script>
+  var t=document.getElementById('tgl');
+  function setTheme(m){document.documentElement.setAttribute('data-theme',m);t.textContent=m==='dark'?'Light':'Dark';try{localStorage.setItem('enel-theme',m)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('enel-theme')}catch(e){}
+  setTheme(saved||'dark');
+  t.addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')});
+</script>
+</body>
+</html>
