@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ēnel Health · Where To Start</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@300..500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1b26'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23d8c28a' text-anchor='middle'%3EĒ%3C/text%3E%3C/svg%3E">
+<style>
+  :root, :root[data-theme="dark"]{
+    color-scheme:dark;
+    --navy:#0d1b26; --navy2:#122733; --navy3:#183340; --navy4:#1f3d4c;
+    --ink:#f4f6f7; --ink-dim:rgba(244,246,247,.72); --ink-faint:#8d99a2;
+    --gold:#8d6d32; --gold-bright:#d8c28a; --gold-soft:#bfa46a;
+    --blue:#7da2e8; --teal:#5cb2aa;
+    --line:rgba(244,246,247,.13); --line2:rgba(244,246,247,.07);
+    --green:#69bd8c; --amber:#d8b06a; --red:#cf6b60; --violet:#9f96d0;
+    --bar-bg:rgba(13,27,38,.9); --shadow:rgba(0,0,0,.5);
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Geist','Geist Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:'Geist Mono','IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  :root[data-theme="light"]{
+    color-scheme:light;
+    --navy:#f4f6f7; --navy2:#ffffff; --navy3:#eaeef0; --navy4:#dfe5e8;
+    --ink:#0d1b26; --ink-dim:#47535c; --ink-faint:#69737b;
+    --gold:#7a5e28; --gold-bright:#8d6d32; --gold-soft:#8d6d32;
+    --blue:#2c55c9; --teal:#2c726c;
+    --line:rgba(13,27,38,.14); --line2:rgba(13,27,38,.08);
+    --green:#2e7d52; --amber:#7c5e14; --red:#a8362b; --violet:#5a4f96;
+    --bar-bg:rgba(244,246,247,.92); --shadow:rgba(40,46,64,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.24}
+  a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--line)}
+  a:hover{border-bottom-color:var(--gold-bright)}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:50;background:var(--bar-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:1140px;margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:22px}
+  .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em}
+  .brand span{color:var(--gold-bright)}
+  .bar nav{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+  .bar nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);border:none}
+  .bar nav a:hover{color:var(--gold-bright)}
+  .tgl{background:transparent;border:1px solid var(--line);color:var(--ink-faint);border-radius:999px;padding:6px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .tgl:hover{color:var(--gold-bright);border-color:var(--gold-soft)}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  .col{max-width:760px}
+  section{padding:62px 0;border-top:1px solid var(--line2)}
+  section:first-of-type{border-top:none}
+
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
+  .num{font-family:var(--mono);font-size:10.5px;letter-spacing:.19em;color:var(--ink-faint)}
+  h1{font-size:clamp(34px,5.4vw,58px);letter-spacing:-.012em}
+  h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:18px;letter-spacing:-.008em}
+  h3{font-size:21px;margin:34px 0 10px}
+  h4{font-size:17.5px;margin:24px 0 8px;font-family:var(--sans);font-weight:600}
+  p{margin-bottom:17px;color:var(--ink-dim)}
+  p.lede{font-size:19.5px;color:var(--ink);line-height:1.55}
+  strong{color:var(--ink);font-weight:600}
+  em{font-style:italic}
+
+  /* hero */
+  .hero{padding:74px 0 56px;background:
+    radial-gradient(1050px 500px at 8% -18%, rgba(92,178,170,.12), transparent 62%),
+    radial-gradient(880px 540px at 108% 112%, rgba(141,109,50,.16), transparent 62%)}
+  .hero .stamp{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold-soft);border-radius:999px;padding:6px 15px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:24px}
+  .hero h1{margin-bottom:20px}
+  .hero .sub{font-family:var(--serif);font-size:clamp(19px,2.4vw,25px);color:var(--ink-dim);font-style:italic;margin-bottom:28px;max-width:720px}
+  .meta{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding-top:22px;border-top:1px solid var(--line)}
+
+  /* panels */
+  .panel{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:26px 28px;margin:26px 0}
+  .panel.gold{background:linear-gradient(158deg,var(--navy2),rgba(141,109,50,.13))}
+  .panel.teal{background:linear-gradient(158deg,var(--navy2),rgba(92,178,170,.11))}
+  .panel h3{margin-top:0}
+  .panel p:last-child{margin-bottom:0}
+  .pull{font-family:var(--serif);font-size:22px;line-height:1.45;color:var(--ink);margin:30px 0;padding-left:0}
+
+  /* stat row */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:30px 0}
+  .stat{background:var(--navy2);padding:22px 20px}
+  .stat .v{font-family:var(--serif);font-size:29px;color:var(--gold-bright);line-height:1.1}
+  .stat .k{font-size:13px;color:var(--ink-dim);margin-top:7px;line-height:1.45}
+  .stat .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:9px}
+
+  /* tables */
+  .tw{overflow-x:auto;margin:28px 0;border:1px solid var(--line);border-radius:16px}
+  table{width:100%;border-collapse:collapse;background:var(--navy2);min-width:620px}
+  th,td{padding:14px 17px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line2);font-size:14.5px}
+  thead th{background:var(--navy3);font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);font-weight:400}
+  tbody td{color:var(--ink-dim)}
+  tbody td:first-child{color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+  td .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+  .t-lead{color:var(--green);border-color:rgba(105,189,140,.4)}
+  .t-under{color:var(--teal);border-color:rgba(92,178,170,.4)}
+  .t-later{color:var(--amber);border-color:rgba(216,176,106,.4)}
+  .t-no{color:var(--red);border-color:rgba(207,107,96,.4)}
+
+  /* viewpoint cards */
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin:32px 0}
+  .vcard{background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:25px 26px;display:flex;flex-direction:column}
+  .vcard .vk{display:flex;align-items:baseline;gap:11px;margin-bottom:12px}
+  .vcard .vl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--gold-soft)}
+  .vcard h3{margin:0;font-size:20.5px}
+  .vcard .body{font-size:14.8px;color:var(--ink-dim);margin-bottom:14px}
+  .vcard .body b{color:var(--ink);font-weight:600}
+  .vcard dl{margin:0 0 16px;font-size:14px}
+  .vcard dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin-top:12px}
+  .vcard dd{color:var(--ink-dim);margin-top:3px}
+  .vcard .verdict{margin-top:auto;padding-top:15px;border-top:1px solid var(--line2);font-size:14px;color:var(--ink)}
+  .vcard .verdict .tag{margin-right:9px}
+
+  /* sequence */
+  .seq{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin:32px 0}
+  .step{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:21px 22px;position:relative}
+  .step .n{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--gold-soft);margin-bottom:9px}
+  .step h4{margin:0 0 7px;font-family:var(--serif);font-weight:400;font-size:18.5px}
+  .step p{font-size:14px;margin:0;color:var(--ink-dim)}
+  .step .when{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:11px}
+
+  ul,ol{margin:0 0 18px 22px;color:var(--ink-dim)}
+  li{margin-bottom:9px}
+  li strong{color:var(--ink)}
+  ol.tight li{margin-bottom:6px}
+
+  .note{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:var(--ink-faint);line-height:1.6;margin-top:14px}
+  .srclist{font-size:13.8px;color:var(--ink-dim)}
+  .srclist li{margin-bottom:11px}
+  .srclist b{color:var(--ink);font-weight:600}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 66px;color:var(--ink-faint);font-size:13.5px}
+
+  @media (max-width:720px){
+    body{font-size:16px}
+    section{padding:48px 0}
+    .bar nav{display:none}
+    .panel{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span>Ē</span>NEL &nbsp;·&nbsp; Where to start</div>
+  <nav>
+    <a href="#answer">The answer</a>
+    <a href="#window">The window</a>
+    <a href="#words">Three words</a>
+    <a href="#views">Six views</a>
+    <a href="#money">The money</a>
+    <a href="#creators">Creators</a>
+    <a href="#studyone">Study one</a>
+    <a href="#first">Write first</a>
+    <a href="#sources">Sources</a>
+  </nav>
+  <button class="tgl" id="tgl">Light</button>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <div class="stamp">Internal · prepared 17 August 2026</div>
+  <div class="col">
+    <h1>Peptides are the right opening. The study you have described is the wrong one.</h1>
+    <p class="sub">A review of the beachhead question, written against the model, the canon, the four front doors and the council record, with fresh research on where the category actually stands this month.</p>
+  </div>
+  <div class="meta">
+    <div>For Jeffrey Sternberg</div>
+    <div>Reviewed against canon REV01-849M</div>
+    <div>Sources at the foot, all dated</div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<section id="answer">
+  <div class="col">
+    <div class="eyebrow">01 · The answer, stated first</div>
+    <h2>Open on the six peptides the FDA is about to rule on, and publish into the rulemaking.</h2>
+    <p class="lede">Your instinct on peptides is correct, and the reason is stronger than the reason you have been giving. It is not that the category is large. Measured as a market it is small, somewhere around two to three billion dollars against a supplement market of seventy-three billion. It is that on 24 July 2026 an FDA advisory committee voted to let compounding pharmacies make six of these compounds while the agency's own reviewers had written, in the briefing documents for that same meeting, that there is a lack of evidence to evaluate their effectiveness and safety.</p>
+    <p>That sentence is the whole opportunity. A federal agency has said in writing that the evidence does not exist. Its advisers overrode it. Formal rulemaking now has to happen, which means a proposed rule, a public comment docket and a final rule, on a clock that these processes usually run in eight to twenty-four months. Somebody is going to put evidence into that docket. Today nobody has any. There is no registry of BPC-157 users anywhere, and as of March 2026 there were no trials of it even recruiting.</p>
+    <p>So the opening is not a splash for its own sake. It is the one move that puts Ēnel's name inside a federal process within twelve months, on a budget the first $450,000 already covers, in a position no competitor can buy because it goes to whoever files first with real data.</p>
+    <div class="panel gold">
+      <h3>The recommendation in five lines</h3>
+      <ol class="tight">
+        <li><strong>Study one is the PCAC six</strong>, which is BPC-157, TB-500, KPV, MOTS-c, Semax and Epitalon, observed in people already taking them.</li>
+        <li><strong>Strictly observational.</strong> You record the protocol somebody is already running. You never set one, never supply anything, never advise a dose.</li>
+        <li><strong>Roughly a thousand people, not a mass enrolment.</strong> The audience is trivially available and the constraint was never supply.</li>
+        <li><strong>Run a paying register underneath it in three ordinary supplement categories</strong>, because peptides will not pay you and supplements will.</li>
+        <li><strong>Bring creators in as subjects once one study has published</strong>, not before, and give them a process mark rather than an efficacy mark.</li>
+      </ol>
+    </div>
+    <p>What follows is why, where I disagree with the shape you described, five other openings I considered and rejected or deferred, and the specific things that have to be written down before any of it can start.</p>
+  </div>
+</section>
+
+<section id="window">
+  <div class="col">
+    <div class="eyebrow">02 · The window</div>
+    <h2>A regulatory vacuum with a date on it</h2>
+    <p>The sequence of events this year is worth laying out plainly, because the timing is the asset and it will not stay open.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>When</th><th>What happened</th><th>Why it matters to Ēnel</th></tr></thead>
+    <tbody>
+      <tr><td>15 April 2026</td><td>FDA removes twelve peptides from Category 2, the do-not-compound list, after nominations were withdrawn.</td><td>The compounds lose their safety-risk designation without gaining approval. A grey zone opens.</td></tr>
+      <tr><td>23 to 24 July 2026</td><td>The Pharmacy Compounding Advisory Committee recommends six of seven peptides for the 503A bulks list. Semax passes 8 to 5, Epitalon 7 to 5, DSIP fails 6 to 7.</td><td>The committee broke with FDA staff on all six. Staff had recommended against every one.</td></tr>
+      <tr><td>Same meeting</td><td>FDA reviewers write that there is a lack of evidence to evaluate the effectiveness and safety of the peptides under review.</td><td>The agency has documented the exact gap Ēnel exists to fill, in the exact compounds Ēnel's library already covers.</td></tr>
+      <tr><td>Now until roughly 2027 or 2028</td><td>Notice-and-comment rulemaking. Proposed rule, public docket, final rule. FDA is not bound by the committee.</td><td>A named public process, with a comment period, that has room for evidence and currently has none.</td></tr>
+      <tr><td>Meanwhile</td><td>These peptides remain unlawful to compound, and FDA can keep enforcing against pharmacies that use them.</td><td>Everyone selling into this demand is exposed. Evidence is the only thing that reduces the exposure.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="col">
+    <p>Against that, look at what is on the other side of the counter. Demand is not speculative and it is not quiet.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v">10.1M</div><div class="k">US peptide searches a month in January 2026, about five times the 2020 level</div><div class="s">Trend data</div></div>
+    <div class="stat"><div class="v">200K+</div><div class="k">members of r/Peptides, with roughly 70,000 weekly visitors</div><div class="s">Community</div></div>
+    <div class="stat"><div class="v">8 → 100</div><div class="k">BPC-157 on Google's popularity scale, January 2023 to April 2026</div><div class="s">Attention</div></div>
+    <div class="stat"><div class="v">83%</div><div class="k">of peptide-aware US adults want licensed pharmacies allowed to compound them</div><div class="s">Hone Health, n=2,491, May 2026</div></div>
+    <div class="stat"><div class="v">11%</div><div class="k">of US adults currently taking a GLP-1 for weight loss, up from 3% in 2024</div><div class="s">Gallup, n=5,065, June 2026</div></div>
+    <div class="stat"><div class="v">54 of 129</div><div class="k">compounds in Ēnel's own peptide library sitting at the weakest evidence grade</div><div class="s">Internal</div></div>
+  </div>
+  <div class="col">
+    <p>That last figure is the one I would put on a slide. Ēnel can already prove the vacuum from its own reference layer. Fifty-four of the hundred and twenty-nine compounds in the library sit at grade one, which is the floor, with a median of zero randomised trials behind them. You are not asserting that the evidence is missing. You published the map of where it is missing before you asked anybody for a dollar.</p>
+    <p class="pull">The strongest version of the pitch is not that peptides are hot. It is that the federal government has written down that nobody knows, and Ēnel is the only party organised to find out.</p>
+    <p>One more piece of timing. Hims &amp; Hers has guided to between $3.1B and $3.3B of revenue for 2026, owns a pharmacy it bought in 2025, and is preparing a peptide launch that analysts have sized at around $440M with more than a billion over five to ten years. Within a year there will be a listed company with real reputational exposure selling these compounds at scale. That company needs evidence more than any supplement brand needs a badge, and it cannot generate the evidence itself without the finding being worthless.</p>
+  </div>
+</section>
+
+<section id="words">
+  <div class="col">
+    <div class="eyebrow">03 · Three words that have to change</div>
+    <h2>All-peptides, all-people, all-protocols</h2>
+    <p>Each of those three is doing damage, and one of them is a legal problem rather than a design preference.</p>
+
+    <h3>All-protocols is the dangerous one</h3>
+    <p>If Ēnel assigns a protocol, recommends a dose, supplies a compound or tells a participant to change what they are doing, the study stops being observational and becomes a clinical investigation of an unapproved drug. The usual exemption from filing an investigational new drug application is available only for a drug that is lawfully marketed in the United States. These peptides are not lawfully marketed, so the exemption is unavailable and the exposure is real. An institutional review board does not cure it. Boards approve human-subjects protection; they do not grant relief from drug law.</p>
+    <p>The workable version is narrow and it is still enormously valuable. You record the protocol the person is already running, in their own words, with the dose they chose, from the source they used, for as long as they keep going. You add nothing to their behaviour and you take nothing away from it. That design is publishable, insurable, and defensible in front of a regulator, and it is the only version that can also be filed into a docket without becoming the story for the wrong reason.</p>
+    <div class="panel">
+      <h4>The line to write into the protocol, and never cross</h4>
+      <p>Ēnel observes. Ēnel does not prescribe, dispense, supply, dose, titrate, recommend, or advise cessation. Every participant arrives with a regimen they chose before Ēnel existed in their life, and leaves with the same one unless their own clinician changes it.</p>
+    </div>
+
+    <h3>All-peptides dilutes the finding to nothing</h3>
+    <p>A hundred and twenty-nine compounds, times the number of protocols people actually run, times the number of stacks they run them in, produces a cell count that will never reach a publishable conclusion anywhere. The first study needs few enough compounds that each one gets a real n and an endpoint somebody can check.</p>
+    <p>The six the committee voted on are not an arbitrary six. They are the ones with a federal process attached, which means the scope of study one has a justification that is nothing to do with commercial interest. That is a rare and valuable thing to be able to say about a first study, and it answers the question the council spent most of its time on, which is who chose what gets measured and why.</p>
+
+    <h3>All-people is right for the platform and wrong for study one</h3>
+    <p>An open cohort of everybody gives you volume without comparability. What makes a finding land is a population where a comparator already exists inside the cohort. The obvious one here is the overlap you are already sitting on. Eleven per cent of US adults are currently on a GLP-1 and fifteen per cent have used one, and a meaningful share of those people are adding a second compound for muscle preservation, recovery, hair or sleep. Those people can be compared with GLP-1 users who added nothing, inside the same cohort, on the same measurements. That is a real study with a real control group and it costs nothing extra to design.</p>
+
+    <h3>Massive is a false economy</h3>
+    <p>A big study here is about a thousand people. That number is already in the model and it is the number that should be in the press release. Massive and vague costs the same as focused and defensible, takes longer to fill, and publishes less. Given a community of two hundred thousand on one forum alone and ten million searches a month, recruitment is not the constraint and never was. Protocol design, adjudication and the publication gates are the constraint, which is the honest thing to say and the thing that makes the operating plan credible.</p>
+  </div>
+</section>
+
+<section id="views">
+  <div class="col">
+    <div class="eyebrow">04 · Six openings</div>
+    <h2>What else I considered</h2>
+    <p>You asked for viewpoints rather than a verdict, so here are the six I worked through, including the two I would not do and the one I think is the quiet hedge worth four phone calls.</p>
+  </div>
+
+  <div class="vgrid">
+
+    <div class="vcard">
+      <div class="vk"><span class="vl">A</span><h3>Peptides, as you described it</h3></div>
+      <div class="body">All compounds, all people, all protocols, one very large IRB study, launched as a splash.</div>
+      <dl>
+        <dt>The case</dt><dd>Maximum surface area, maximum press, and the library already covers the whole field. One study to point at instead of twelve.</dd>
+        <dt>What breaks it</dt><dd>All-protocols invites a drug-law problem the IRB cannot solve. All-compounds guarantees that no single finding reaches significance. The splash arrives before there is anything to report, which spends the attention at the moment you have least to say.</dd>
+      </dl>
+      <div class="verdict"><span class="tag t-later">Revise</span>Right category, wrong three adjectives.</div>
+    </div>
+
+    <div class="vcard">
+      <div class="vk"><span class="vl">B</span><h3>GLP-1 first</h3></div>
+      <div class="body">Go where the mass actually is. Eleven per cent of adults currently using, fifteen per cent ever, awareness at ninety-one per cent.</div>
+      <dl>
+        <dt>The case</dt><dd>The largest live question in consumer health, the loudest social conversation, and a population already measuring itself weekly.</dd>
+        <dt>What breaks it</dt><dd>The interesting efficacy questions belong to Novo and Lilly and are already answered by registrational trials. FDA issued thirty warning letters in March 2026 and twenty-five more in June to telehealth firms over compounded GLP-1 claims, so the adjacent commercial space is under active enforcement. You would be a small voice in a crowded, well-funded room.</dd>
+      </dl>
+      <div class="verdict"><span class="tag t-under">Fold in</span>Use it as the comparator arm and the recruiting channel, not the headline.</div>
+    </div>
+
+    <div class="vcard">
+      <div class="vk"><span class="vl">C</span><h3>The docket wedge</h3></div>
+      <div class="body">The six PCAC compounds, observed, plus the question nobody is asking, which is what is actually in the vial people bought.</div>
+      <dl>
+        <dt>The case</dt><dd>A named federal process with a comment period and no evidence in it. No registry exists. No trials were recruiting as of March 2026. Ēnel's library already covers every compound and can show where the evidence stops.</dd>
+        <dt>What breaks it</dt><dd>FDA is not obliged to follow its committee and could revert, which would strand a study designed only for the docket. Mitigated by designing it to stand on its own as the first real-world safety record in the category.</dd>
+      </dl>
+      <div class="verdict"><span class="tag t-lead">Lead with this</span>The one opening that cannot be bought by a better-funded competitor.</div>
+    </div>
+
+    <div class="vcard">
+      <div class="vk"><span class="vl">D</span><h3>Register first, on ordinary supplements</h3></div>
+      <div class="body">Skip the splash. Open the master protocol in three high-prevalence categories where brands already have budget to protect.</div>
+      <dl>
+        <dt>The case</dt><dd>This is where the money is. Validation and listing is the largest line in the model at $267M, and supplement brands spend thirty to forty per cent of revenue on marketing while carrying a twenty to sixty per cent penalty on cost per lead for want of substantiation.</dd>
+        <dt>What breaks it</dt><dd>Nothing breaks it. It is simply not a story, and a company with fifteen new members a week needs a story as much as it needs a customer.</dd>
+      </dl>
+      <div class="verdict"><span class="tag t-under">Run underneath</span>The revenue beachhead, deliberately separate from the attention beachhead.</div>
+    </div>
+
+    <div class="vcard">
+      <div class="vk"><span class="vl">E</span><h3>Creator cohort first</h3></div>
+      <div class="body">Make study one the influencer study. Recruit the people with audiences and let their reach do the launch.</div>
+      <dl>
+        <dt>The case</dt><dd>Fastest reach available, no paid channel required, and it is the arrangement with a creator that does not contradict the decision to displace them.</dd>
+        <dt>What breaks it</dt><dd>If the first thing Ēnel ever publishes is about famous people, the method is judged by the company it keeps. You also have no track record to point to when a creator asks what the finding will look like, which is the moment the offer either lands or does not.</dd>
+      </dl>
+      <div class="verdict"><span class="tag t-later">Second act</span>Powerful, and it needs one published study behind it first.</div>
+    </div>
+
+    <div class="vcard">
+      <div class="vk"><span class="vl">F</span><h3>Panel signal to payers and employers</h3></div>
+      <div class="body">Sell population-level visibility of what people take outside the formulary, to plans and self-insured employers.</div>
+      <dl>
+        <dt>The case</dt><dd>It prices the panel rather than the verdict, so the conflict that dogs every other line disappears entirely. Payers currently have no view of this and carry the cost when it interacts badly.</dd>
+        <dt>What breaks it</dt><dd>Long sales cycles, procurement, and nothing to show a consumer. It cannot be a beachhead because it produces no audience.</dd>
+      </dl>
+      <div class="verdict"><span class="tag t-under">Test now, cheaply</span>Four conversations before the raise opens tells you whether a conflict-free second side exists.</div>
+    </div>
+
+  </div>
+
+  <div class="col">
+    <p>Two openings I did not put on the list, and should say why. Clinician-directed advertising and clinical trial recruitment are both larger than anything above, and both are excluded by the scope you set. They stay on the shelf until the record is deep enough to make either of them a two-year build rather than a five-year one.</p>
+  </div>
+</section>
+
+<section id="money">
+  <div class="col">
+    <div class="eyebrow">05 · Where the money actually is</div>
+    <h2>In peptides, the buyer is the channel, not the brand</h2>
+    <p>This is the part of the peptide plan I would change most, and it is the part most likely to be caught by a good investor in the meeting rather than after it.</p>
+    <p>The register earns its money from brands who exist as brands, can legally advertise efficacy, and have a marketing budget to defend. In peptides, none of that holds. The sellers are compounding pharmacies, licensed telehealth practices, and a long tail of research-chemical resellers. Efficacy claims are not available to any of them, because the compounds are unapproved and, right now, not even lawful to compound. So if the plan implies peptide validation revenue, the plan is wrong, and the correction is easy to make now and awkward to make later.</p>
+    <p>What peptides earn you is the record, the audience, the standing and a federal citation. What they can also earn, and this is the piece I have not seen written down anywhere in the materials, is money from the legitimate channel trying to distinguish itself from the grey market.</p>
+    <div class="panel teal">
+      <h3>The finding nobody has and everybody needs</h3>
+      <p>Nobody knows what is in the vials people are buying. Grey-market peptides are widely reported to carry wrong doses, contaminants, or different substances altogether. If Ēnel records where each participant sourced their compound, and later tests a sample of what they hold, it becomes the only source of truth on supply-side quality in the category.</p>
+      <p>That finding harms no legitimate seller. It helps every consumer immediately. It is precisely what a rulemaking docket needs. And it gives licensed pharmacies and telehealth prescribers a commercial reason to fund the record, because the finding is the thing that separates them from a reseller with a website. That is the peptide-category customer, and it is a customer who wants the study to be rigorous rather than favourable.</p>
+    </div>
+
+    <h3>The substantiation standard is a design requirement</h3>
+    <p>Related, and load-bearing for the largest line in the model. The FTC's Health Products Compliance Guidance says that health-benefit claims will generally need randomised, controlled human trials to meet the competent-and-reliable-evidence standard, and that epidemiological evidence substitutes only where experts in the field accept it and randomised trials are not feasible.</p>
+    <p>Read against the register, that says an observational score on its own does not let a brand make a claim. Which means the thing a brand pays for cannot be the observation. It has to be the randomised arm nested inside the open cohort, which the model already prices, and that arm has to actually randomise. The good news is that this also resolves the sharpest objection on the council record. A paying brand gets a randomised arm and a claim it can use. Everybody else in the category gets the descriptive finding, published, for free. The difference between the two is legible, defensible, and has nothing to do with the verdict being for sale.</p>
+    <div class="tw"><table>
+      <thead><tr><th>What is produced</th><th>Who pays</th><th>What they can do with it</th></tr></thead>
+      <tbody>
+        <tr><td>Category observation, all brands named</td><td>Nobody. Published free.</td><td>Read it. It is the public good that makes the rest credible.</td></tr>
+        <tr><td>Randomised arm inside the open cohort</td><td>The brand that commissions it</td><td>Substantiate a claim to the FTC standard, and keep an ad account open.</td></tr>
+        <tr><td>Supply-source and quality record</td><td>Licensed pharmacies, telehealth, and eventually the regulator's process</td><td>Distinguish a licensed channel from a grey one, on evidence.</td></tr>
+        <tr><td>Population consumption signal</td><td>Payers, self-insured employers, PBMs</td><td>See what their members take outside the formulary.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Four buyers, and only one of them has any interest in the verdict going a particular way. That is a better answer to the conflict question than any governance document, because it is structural.</p>
+  </div>
+</section>
+
+<section id="generation">
+  <div class="col">
+    <div class="eyebrow">06 · The generation, read honestly</div>
+    <h2>Right target, and one number that should stop you overclaiming</h2>
+    <p>Gen Z and millennials are the correct audience and the evidence is strong. They are thirty-six per cent of US adults and forty-one per cent of annual wellness spend. Close to thirty per cent say they are prioritising wellness a lot more than a year ago, against as little as twenty-three per cent of older groups. Three quarters of Gen Z reach for AI before professional care. They trust independent research and reviews above brands, and ninety-four per cent of brands score lower on trust with them than with anyone else.</p>
+    <p>Here is the number that complicates the story, and I would rather you heard it from me than from an investor. Asked what they plan to do about their health, only about twenty-one per cent of this group say they intend to optimise or biohack with technology, tracking or specialised supplements. Seventy-seven per cent say they intend to simplify, around sleep, hydration and exercise.</p>
+    <p>That does not damage the beachhead. A beachhead is supposed to be a small, intense population, and the twenty-one per cent are exactly the people who self-experiment, buy the compounds, keep the spreadsheets and post the results. It damages the sizing. If a deck uses the forty-one per cent of wellness spend to imply that the whole generation is the peptide market, the arithmetic falls apart under one question. Use the loud minority to open, and the simplifiers to scale later through sleep, gut and the ordinary categories where they actually spend.</p>
+    <p class="pull">The people who will make the first study are not the generation. They are the fraction of it that already runs experiments on itself and publishes the results for nothing but attention.</p>
+    <p>Which is the point worth keeping in front of every investor conversation. Millions of people already publish their health story for free, in exchange for attention alone. Ēnel is not asking for a new behaviour. It is offering the same behaviour somewhere it is reciprocated, measured against their own baseline, and accumulated into something that outlasts the post.</p>
+  </div>
+</section>
+
+<section id="creators">
+  <div class="col">
+    <div class="eyebrow">07 · The creators</div>
+    <h2>Right idea, wrong verb</h2>
+    <p>Migration is the wrong frame. You do not want creators to leave TikTok and Instagram, and they will not. Their audience is the asset they bring, and it lives there. What you want is for them to keep the audience where it is and bring it here to watch a result get settled. Ēnel is not a competitor to those platforms. It is the laboratory they have never had.</p>
+    <p>The timing argument is genuinely good, and better than the one in the deck. Verified AI-generated influencers grew more than forty per cent in 2025 and are projected to take around fifteen per cent of influencer marketing spend by the end of 2026. Consumer preference for AI-made creator content has fallen to about twenty-six per cent from sixty per cent in 2023. Human creators are being crowded by synthetic competition at the exact moment their audiences say they want the human thing. What they lack is any way to prove they are both real and right.</p>
+    <p>Ēnel can issue that proof. Two rules make it work and both of them protect you.</p>
+    <div class="panel">
+      <h4>Sign before the result is known</h4>
+      <p>A creator agrees to be studied, and agrees to publication, before anybody knows the answer. Nothing is paid against the outcome, which is already the standing rule. This is the whole integrity of the arrangement, and it is also what makes the content good. An audience can tell the difference between somebody who was tested and somebody who was sponsored.</p>
+      <h4>A process mark, never an efficacy mark</h4>
+      <p>What a creator may display is that they were studied here and that the finding, whatever it was, is published here. Not a score, not a badge implying the product works. A mark in consumer-facing advertising is worth what the certifier's reputation is worth, and Ēnel will not have that standing for three to five years. Handing an efficacy mark to a creator before then puts the most valuable thing you own in the hands of the person with the least incentive to protect it.</p>
+    </div>
+    <p>And the refusals are useful. Somebody with a large audience who declines to have their claim tested has told that audience something, and you never have to say a word about it.</p>
+  </div>
+</section>
+
+<section id="studyone">
+  <div class="col">
+    <div class="eyebrow">08 · Study one, concretely</div>
+    <h2>What I would actually launch</h2>
+    <p>Specific enough to cost, small enough to finish, and shaped so the output has a named destination on the day it is written.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Element</th><th>The specification</th></tr></thead>
+    <tbody>
+      <tr><td>Scope</td><td>BPC-157, TB-500, KPV, MOTS-c, Semax, Epitalon. Plus a co-use stratum for participants also taking a GLP-1, and a comparison stratum of GLP-1 users taking nothing else.</td></tr>
+      <tr><td>Design</td><td>Prospective observational cohort. No assignment, no supply, no dosing guidance. Protocols recorded as run.</td></tr>
+      <tr><td>Size</td><td>About 1,000, filled in weeks from communities that already exist. Founding cohort of 330 as costed in the first $450,000.</td></tr>
+      <tr><td>Primary outputs</td><td>The discontinuation ledger, meaning what people stopped and why, on the eight reasons already designed. Adverse events. Source of supply. Objective markers on a consented subset.</td></tr>
+      <tr><td>The finding nobody else has</td><td>Faded against never worked. One is a tolerance signal, the other is a category signal, and no product in this market has a discontinuation curve today.</td></tr>
+      <tr><td>Governance</td><td>IRB relationship in place before enrolment, which also converts the largest consumer-health-data exposure into a statutory carve-out. A Certificate of Confidentiality requested from NIH, which is available for IRB-approved research that is not federally funded and shields identifiable data from subpoena.</td></tr>
+      <tr><td>Destination</td><td>Published in full, nulls included, and filed as a comment when the proposed rule opens its docket.</td></tr>
+      <tr><td>The sentence a journalist can write</td><td>Ēnel has enrolled a thousand people who already take BPC-157 and will publish what happens to them, including nothing.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="col">
+    <p>The press for this beat already exists. STAT wrote about BPC-157's big claims and scant evidence in February, and Time covered the committee vote in July. You are not creating interest in the subject. You are arriving with the one thing every one of those pieces had to say was missing.</p>
+  </div>
+
+  <div class="seq">
+    <div class="step"><div class="n">Act one</div><h4>The registry</h4><p>The PCAC six, observed and published. Attention, standing, and a federal citation.</p><div class="when">Months 1 to 9</div></div>
+    <div class="step"><div class="n">Act two</div><h4>The register</h4><p>Three ordinary supplement categories, master protocol open, randomised arms for sale.</p><div class="when">Runs underneath from month 1</div></div>
+    <div class="step"><div class="n">Act three</div><h4>The creators</h4><p>Subjects, not partners. Signed before the result. Process mark only.</p><div class="when">After study one publishes</div></div>
+    <div class="step"><div class="n">Act four</div><h4>The panel</h4><p>Population signal to payers and employers. The line that survives if the register thesis is wrong.</p><div class="when">Test with four calls now</div></div>
+  </div>
+
+  <div class="col">
+    <p>Note what act two does to the story you tell investors. The register compounds whether or not any individual brand engages, because a study covers a category and records every brand inside it, and because the study never closes. A brand that arrives in month thirty is scored against a cohort that has been running for two years and cost nothing extra to keep running. That is the part of this business nobody can catch from a standing start, and it is worth more airtime than the year-five number.</p>
+  </div>
+</section>
+
+<section id="first">
+  <div class="col">
+    <div class="eyebrow">09 · Before any of it</div>
+    <h2>Five things to write down first</h2>
+    <p>The council record landed on one of these already and I would not soften it. The rest follow from the peptide plan specifically.</p>
+    <ol>
+      <li><strong>The study selection rule.</strong> Who chooses which category is measured, in what order, against what comparator, at what dose, over what window, at what slot price, and who decides when the rule and the money disagree. The peptide opening makes this urgent rather than theoretical, because the first sponsored offer in this category will come from the largest seller in it, and it will arrive with a number attached and nothing objectionable on its face.</li>
+      <li><strong>The observational boundary.</strong> One paragraph, in the protocol and in the consent, stating that Ēnel does not prescribe, supply, dose or advise. This is what keeps a registry a registry.</li>
+      <li><strong>The IRB relationship.</strong> Wanted for publication and partnership anyway, required for the research exemption under Washington's My Health My Data Act and Nevada SB 370, and a precondition for a Certificate of Confidentiality. Nothing about a peptide cohort should be enrolled before it exists.</li>
+      <li><strong>Consent written for third-party studies now.</strong> Retrofitting consent across an enrolled panel is not possible, and every week of enrolment under narrow consent shrinks what can be licensed later.</li>
+      <li><strong>What the register is, in one page.</strong> Name each asset separately, name who pays for which, and name what a paying brand receives that the non-paying brands in its category do not. On the model above the answer is a randomised arm and a usable claim, which is a clean answer, and it is currently not written anywhere.</li>
+    </ol>
+    <p class="note">Not legal advice. The drug-law, FTC and state-privacy points here need counsel's sign-off before a single participant is enrolled, and the IND question in particular should go to a regulatory lawyer rather than a general one.</p>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="col">
+    <div class="eyebrow">10 · Sources</div>
+    <h2>What this rests on</h2>
+    <ul class="srclist">
+      <li><b>PCAC vote and FDA staff position.</b> <a href="https://www.hklaw.com/en/insights/publications/2026/08/fda-advisory-committee-endorses-compounding-of-certain-peptides">Holland &amp; Knight, FDA Advisory Committee Endorses Compounding of Certain Peptides</a>, and <a href="https://www.bipc.com/fda-pcac-recommends-six-peptides-for-the-503a-bulks-list-what-compounding-pharmacies-need-to-know">Buchanan Ingersoll &amp; Rooney on the six recommended compounds and the rulemaking that follows</a>. Vote detail also in <a href="https://www.mintz.com/insights-center/viewpoints/2146/2026-07-29-fdas-advisory-committee-votes-peptides-what-it-does-and">Mintz, what the vote does and does not do</a>, and <a href="https://www.ajmc.com/view/fda-panel-backs-6-peptides-for-compounding">AJMC</a>.</li>
+      <li><b>Category 2 removal, April 2026.</b> <a href="https://www.orrick.com/en/Insights/2026/04/FDA-Announces-Removal-of-12-Peptides-from-Category-2-and-Schedules-PCAC-Meetings">Orrick</a> and <a href="https://www.thefdalawblog.com/2026/04/fdas-peptide-rally-what-compounders-and-industry-need-to-know-post-1-of-2/">the FDA Law Blog</a>.</li>
+      <li><b>Evidence state of BPC-157.</b> <a href="https://www.statnews.com/2026/02/03/bpc-157-peptide-science-safety-regulatory-questions/">STAT, big claims and scant evidence</a>. Trial and registry status via <a href="https://peptide-db.com/guides/bpc-157-human-trials">human-trial trackers</a>, which report no actively recruiting trials as of March 2026 and one Phase 2 opened in February.</li>
+      <li><b>Committee coverage.</b> <a href="https://time.com/article/2026/07/23/fda-committee-peptides/">Time on the committee vote</a>.</li>
+      <li><b>GLP-1 prevalence.</b> <a href="https://news.gallup.com/poll/712157/glp-usage-reaches-new-high.aspx">Gallup, usage reaches new high</a>, web survey of 5,065 US adults, 28 May to 5 June 2026. Compounded share of current use from the same reporting.</li>
+      <li><b>Enforcement against compounded GLP-1 marketing.</b> <a href="https://www.venable.com/insights/publications/2026/03/fdas-latest-glp-1-crackdown-what-compounders">Venable on the March 2026 warning letters</a> and <a href="https://www.mcdermottlaw.com/insights/fda-takes-aim-at-misleading-online-claims-for-compounded-glp-1-drugs/">McDermott on the June 2026 round</a>.</li>
+      <li><b>Peptide demand and community scale.</b> <a href="https://krdo.com/stacker-nutrition-diet/2026/07/22/83-of-peptide-aware-americans-want-the-fda-to-make-peptides-more-accessible/">Hone Health survey of 2,491 peptide-aware US adults, 8 to 11 May 2026</a>. Search volume, forum size and trend figures from <a href="https://peptidesexplorer.com/blog/peptide-statistics-2026">aggregated 2026 peptide statistics</a>, treated as indicative rather than authoritative.</li>
+      <li><b>Commercial entry.</b> <a href="https://finance.yahoo.com/healthcare/articles/hims-prepares-peptides-launch-wall-183346301.html">Reuters via Yahoo Finance on the Hims peptide launch, guidance and analyst sizing</a>, and <a href="https://www.cnbc.com/2026/04/16/rfk-jr-peptides-hims-hers-glp-1.html">CNBC on the policy shift</a>.</li>
+      <li><b>Substantiation standard.</b> <a href="https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance">FTC Health Products Compliance Guidance</a>, with the randomised-trial reading set out by <a href="https://www.cov.com/en/news-and-insights/insights/2023/01/ftc-issues-new-guidance-on-health-related-claims-to-replace-the-dietary-supplements-advertising-guide">Covington</a> and <a href="https://www.cooley.com/news/insight/2023/2023-03-02-ftc-revises-health-products-compliance-guidance">Cooley</a>.</li>
+      <li><b>IND exemption limits.</b> <a href="https://www.ecfr.gov/current/title-21/chapter-I/subchapter-D/part-312">21 CFR Part 312</a>, with the lawfully-marketed condition explained by <a href="https://www.allucent.com/resources/blog/ind-requirements-and-exemptions">Allucent</a>.</li>
+      <li><b>Certificate of Confidentiality.</b> <a href="https://grants.nih.gov/policy-and-compliance/policy-topics/human-subjects/coc/for-research-not-funded-by-nih">NIH, CoCs for research not funded by NIH</a>.</li>
+      <li><b>Generational spend and behaviour.</b> <a href="https://www.mckinsey.com/~/media/mckinsey/email/genz/2025/06/2025-06-03b.html">McKinsey Future of Wellness</a> for the 36 and 41 per cent figures, and <a href="https://www.truemed.com/blog/gen-z-hsa-fsa-spending-report">the simplify-versus-optimise split</a>.</li>
+      <li><b>Creator economy.</b> <a href="https://www.creatoriq.com/press/releases/creatoriq-state-of-creators-report-2026">CreatorIQ State of Creators 2026</a>, <a href="https://communicateonline.me/insights/battle-for-ai-influencer-trust-intensifies-as-creator-economy-surges/">AI-influencer growth and spend share</a>, and <a href="https://digiday.com/media/after-an-oversaturation-of-ai-generated-content-creators-authenticity-and-messiness-are-in-high-demand/">Digiday on the authenticity premium</a>.</li>
+      <li><b>Internal.</b> Canon REV01-849M, the five-year model, the market potential review of 29 July, the consent design of 8 August, the four front doors and the 129-compound peptide atlas, and council record CR-2026-08-16-01.</li>
+    </ul>
+    <p class="note">Figures drawn from vendor and aggregator pages are marked as indicative. Anything that would go into an investor document should be re-sourced to a primary before it is printed, per the standing rule that a hand-typed number beside twenty derived ones is the one that rots.</p>
+  </div>
+</section>
+
+<footer><div class="col">
+  <p>Ēnel Health, internal. Prepared 17 August 2026 against the canon, the model, the front doors and the council record. Nothing here is legal advice, and the drug-law and privacy points need counsel before enrolment.</p>
+</div></footer>
+
+</div>
+
+<script>
+  var t=document.getElementById('tgl');
+  function setTheme(m){document.documentElement.setAttribute('data-theme',m);t.textContent=m==='dark'?'Light':'Dark';try{localStorage.setItem('enel-theme',m)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('enel-theme')}catch(e){}
+  setTheme(saved||'dark');
+  t.addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')});
+</script>
+</body>
+</html>
