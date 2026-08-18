@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ēnel Health · What Actually Replicates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@300..500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d1b26'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23d8c28a' text-anchor='middle'%3EĒ%3C/text%3E%3C/svg%3E">
+<style>
+  :root, :root[data-theme="dark"]{
+    color-scheme:dark;
+    --navy:#0d1b26; --navy2:#122733; --navy3:#183340; --navy4:#1f3d4c;
+    --ink:#f4f6f7; --ink-dim:rgba(244,246,247,.72); --ink-faint:#8d99a2;
+    --gold:#8d6d32; --gold-bright:#d8c28a; --gold-soft:#bfa46a;
+    --teal:#5cb2aa;
+    --line:rgba(244,246,247,.13); --line2:rgba(244,246,247,.07);
+    --green:#69bd8c; --amber:#d8b06a; --red:#cf6b60;
+    --bar-bg:rgba(13,27,38,.9);
+    /* chart tokens, validated against surface #122733 */
+    --mark:#13a596;          /* single-series mark */
+    --mark-lo:#2f8f86;       /* ordinal step 1, the weaker state */
+    --mark-hi:#7fd3ca;       /* ordinal step 2, the stronger state */
+    --grid:rgba(244,246,247,.10);
+    --axis:rgba(244,246,247,.34);
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Geist','Geist Variable',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:'Geist Mono','IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  :root[data-theme="light"]{
+    color-scheme:light;
+    --navy:#f4f6f7; --navy2:#ffffff; --navy3:#eaeef0; --navy4:#dfe5e8;
+    --ink:#0d1b26; --ink-dim:#47535c; --ink-faint:#69737b;
+    --gold:#7a5e28; --gold-bright:#8d6d32; --gold-soft:#8d6d32;
+    --teal:#2c726c;
+    --line:rgba(13,27,38,.14); --line2:rgba(13,27,38,.08);
+    --green:#2e7d52; --amber:#7c5e14; --red:#a8362b;
+    --bar-bg:rgba(244,246,247,.92);
+    --mark:#14625c;
+    --mark-lo:#2f8f86;
+    --mark-hi:#14625c;
+    --grid:rgba(13,27,38,.11);
+    --axis:rgba(13,27,38,.42);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.24}
+  a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--line)}
+  a:hover{border-bottom-color:var(--gold-bright)}
+  .bar{position:sticky;top:0;z-index:50;background:var(--bar-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:1140px;margin:0 auto;padding:13px 26px;display:flex;align-items:center;gap:22px}
+  .brand{font-family:var(--serif);font-size:19px;letter-spacing:.02em}
+  .brand span{color:var(--gold-bright)}
+  .bar nav{margin-left:auto;display:flex;gap:19px;flex-wrap:wrap}
+  .bar nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);border:none}
+  .bar nav a:hover{color:var(--gold-bright)}
+  .tgl{background:transparent;border:1px solid var(--line);color:var(--ink-faint);border-radius:999px;padding:6px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .tgl:hover{color:var(--gold-bright);border-color:var(--gold-soft)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  .col{max-width:760px}
+  section{padding:60px 0;border-top:1px solid var(--line2)}
+  section:first-of-type{border-top:none}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
+  h1{font-size:clamp(32px,5vw,54px);letter-spacing:-.012em}
+  h2{font-size:clamp(25px,3.3vw,35px);margin-bottom:18px;letter-spacing:-.008em}
+  h3{font-size:21px;margin:32px 0 10px}
+  h4{font-size:17.5px;margin:24px 0 8px;font-family:var(--sans);font-weight:600}
+  p{margin-bottom:17px;color:var(--ink-dim)}
+  p.lede{font-size:19.5px;color:var(--ink);line-height:1.55}
+  strong{color:var(--ink);font-weight:600}
+  .hero{padding:70px 0 52px;background:
+    radial-gradient(1050px 500px at 8% -18%, rgba(92,178,170,.12), transparent 62%),
+    radial-gradient(880px 540px at 108% 112%, rgba(141,109,50,.16), transparent 62%)}
+  .hero .stamp{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--gold-soft);border-radius:999px;padding:6px 15px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:24px}
+  .hero .sub{font-family:var(--serif);font-size:clamp(19px,2.4vw,25px);color:var(--ink-dim);font-style:italic;margin:20px 0 26px;max-width:730px}
+  .meta{display:flex;gap:26px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding-top:22px;border-top:1px solid var(--line)}
+  .panel{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:25px 27px;margin:26px 0}
+  .panel.gold{background:linear-gradient(158deg,var(--navy2),rgba(141,109,50,.13))}
+  .panel.teal{background:linear-gradient(158deg,var(--navy2),rgba(92,178,170,.11))}
+  .panel.warn{background:linear-gradient(158deg,var(--navy2),rgba(207,107,96,.12))}
+  .panel h3,.panel h4{margin-top:0}
+  .panel p:last-child{margin-bottom:0}
+  .pull{font-family:var(--serif);font-size:22px;line-height:1.45;color:var(--ink);margin:30px 0}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:30px 0}
+  .stat{background:var(--navy2);padding:22px 20px}
+  .stat .v{font-family:var(--serif);font-size:30px;color:var(--gold-bright);line-height:1.1}
+  .stat .k{font-size:13px;color:var(--ink-dim);margin-top:7px;line-height:1.45}
+  .stat .s{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:9px}
+  /* figure */
+  figure{margin:34px 0;background:var(--navy2);border:1px solid var(--line);border-radius:18px;padding:24px 26px 20px}
+  figure .ftitle{font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:5px}
+  figure .fsub{font-size:14px;color:var(--ink-dim);margin-bottom:20px;max-width:640px}
+  figure svg{width:100%;height:auto;display:block;overflow:visible}
+  .lg{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:2px 0 16px;font-size:13px;color:var(--ink-dim)}
+  .lg i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+  figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-faint);line-height:1.6;margin-top:16px;padding-top:14px;border-top:1px solid var(--line2)}
+  .tblbtn{background:transparent;border:1px solid var(--line);color:var(--ink-faint);border-radius:999px;padding:5px 12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;margin-top:14px}
+  .tblbtn:hover{color:var(--gold-bright);border-color:var(--gold-soft)}
+  .dtable{display:none;margin-top:16px}
+  .dtable.on{display:block}
+  .tw{overflow-x:auto;margin:26px 0;border:1px solid var(--line);border-radius:16px}
+  table{width:100%;border-collapse:collapse;background:var(--navy2);min-width:560px}
+  th,td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line2);font-size:14.5px}
+  thead th{background:var(--navy3);font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);font-weight:400}
+  tbody td{color:var(--ink-dim)}
+  tbody td:first-child{color:var(--ink)}
+  tr:last-child td{border-bottom:none}
+  td.n,th.n{font-family:var(--mono);font-size:13px;text-align:right;white-space:nowrap}
+  ul,ol{margin:0 0 18px 22px;color:var(--ink-dim)}
+  li{margin-bottom:9px}
+  li strong{color:var(--ink)}
+  .note{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:var(--ink-faint);line-height:1.6;margin-top:14px}
+  .srclist{font-size:13.8px;color:var(--ink-dim)}
+  .srclist li{margin-bottom:11px}
+  .srclist b{color:var(--ink);font-weight:600}
+  #tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .12s;background:var(--navy3);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;color:var(--ink);box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:99;max-width:250px;line-height:1.45}
+  #tip b{display:block;font-size:11.5px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:3px;font-weight:400}
+  .hit{cursor:default}
+  footer{border-top:1px solid var(--line);padding:38px 0 64px;color:var(--ink-faint);font-size:13.5px}
+  @media (max-width:720px){body{font-size:16px}section{padding:46px 0}.bar nav{display:none}.panel,figure{padding:20px}}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+
+<div class="bar"><div class="bar-in">
+  <div class="brand"><span>Ē</span>NEL &nbsp;·&nbsp; What actually replicates</div>
+  <nav>
+    <a href="#concede">Conceded</a>
+    <a href="#right">You're right</a>
+    <a href="#best">Your best evidence</a>
+    <a href="#turns">Where it turns</a>
+    <a href="#n">On volume</a>
+    <a href="#build">What to build</a>
+    <a href="#framing">The framing</a>
+    <a href="#sources">Sources</a>
+  </nav>
+  <button class="tgl" id="tgl">Light</button>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <div class="stamp">Internal · 17 August 2026 · the map you asked for</div>
+  <div class="col">
+    <h1>You are right about the literature. The published evidence says the lever is design, not volume.</h1>
+    <p class="sub">Written on the argument from your researchers, mathematicians and Dr Dickinson. One concession up front, the reproducibility map with the numbers, the strongest paper for your position, and the one place in this I will not move.</p>
+  </div>
+  <div class="meta">
+    <div>Companion to the beachhead review</div>
+    <div>Both earlier files unedited</div>
+    <div>All figures sourced and dated</div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<section id="concede">
+  <div class="col">
+    <div class="eyebrow">01 · Conceded, without qualification</div>
+    <h2>I misread all-protocols, and the objection goes away</h2>
+    <p class="lede">I read all-protocols as assigning regimens. You mean recording the regimens people are already running and already posting about. On that reading my drug-law objection does not apply at all, because the design is observational by construction, and observing a self-chosen regimen is not a clinical investigation.</p>
+    <p>So the whole of that argument was about a word rather than about the plan, and I am dropping it. All-people and all-protocols stand. What remains in dispute is narrower and worth arguing properly: whether the amount of data is what makes the finding good.</p>
+    <p>The observational boundary still needs writing into the protocol and consent, not because your design crosses it but because a study of unapproved substances should be able to prove on paper that it never did.</p>
+  </div>
+</section>
+
+<section id="right">
+  <div class="col">
+    <div class="eyebrow">02 · Where you are right, and it is worse than you said</div>
+    <h2>The layer your category actually rests on has largely collapsed</h2>
+    <p>Your position is usually argued about clinical trials. The stronger version is about preclinical work, and it matters more here because the evidence base for peptides is almost entirely animal and cell work rather than trials.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v">6 of 53</div><div class="k">landmark preclinical cancer papers that Amgen could replicate, some with the original authors present and blinded</div><div class="s">Begley &amp; Ellis, Nature 2012</div></div>
+    <div class="stat"><div class="v">~25%</div><div class="k">of published target-validation studies Bayer could validate far enough to continue a project</div><div class="s">Prinz et al. 2011</div></div>
+    <div class="stat"><div class="v">32%</div><div class="k">of the most highly cited clinical findings were later contradicted or found to have been exaggerated</div><div class="s">Ioannidis, JAMA 2005</div></div>
+    <div class="stat"><div class="v">Some</div><div class="k">of the 47 irreproducible papers had already spawned whole fields and downstream clinical trials in patients</div><div class="s">Nature 2012</div></div>
+  </div>
+  <div class="col">
+    <p>Read that against BPC-157. Its literature is a large body of rodent work, a handful of small safety studies, and case reports, which is precisely the category that replicates worst. The first controlled human trial only began recruiting in February 2026. So when you say the historical record has not produced good results in this category, the record agrees with you, and it agrees more strongly than the way the point is usually made.</p>
+    <p>The efficacy and effectiveness gap is real too. Trials recruit people selected to be studyable, run for weeks under supervision, and measure a narrow endpoint. Then the product meets people who take it alongside four other things, at a dose they chose, from a source nobody checked. Nothing in the trial literature describes that, and it is the thing a buyer actually wants to know.</p>
+    <p class="pull">Your instinct that the establishment has been measuring the wrong thing under the wrong conditions is well supported. The question is what follows from it.</p>
+  </div>
+</section>
+
+<section id="best">
+  <div class="col">
+    <div class="eyebrow">03 · The strongest paper for your position</div>
+    <h2>Observational data does reproduce trial answers, and the determinant is written down</h2>
+    <p>Your team should be citing this and I have not seen it in any Ēnel document. The RCT-DUPLICATE initiative pre-registered protocols and tried to reproduce thirty-two randomised trials using ordinary insurance claims data, published in JAMA in 2023. It is the largest deliberate test of whether real-world data lands where trials land.</p>
+    <p>Overall agreement across all thirty-two was a correlation of 0.82. In a subset of sixteen where the trial could be emulated closely, agreement rose to 0.93, and the proportion agreeing on statistical significance went from three quarters to almost all of them.</p>
+  </div>
+
+  <figure>
+    <div class="ftitle">Agreement between a randomised trial and its real-world emulation</div>
+    <div class="fsub">Same initiative, same data sources, same statisticians. The only thing that changed between the two states is how closely the emulation could reproduce the trial's design and measurements.</div>
+    <div class="lg">
+      <span><i style="background:var(--mark-lo)"></i>All 32 emulations</span>
+      <span><i style="background:var(--mark-hi)"></i>The 16 closest emulations</span>
+    </div>
+    <svg viewBox="0 0 720 246" role="img" aria-label="Dumbbell chart showing agreement rising when trial emulation is closer">
+      <g stroke="var(--grid)" stroke-width="1">
+        <line x1="250" y1="34" x2="250" y2="212"/><line x1="336" y1="34" x2="336" y2="212"/>
+        <line x1="422" y1="34" x2="422" y2="212"/><line x1="508" y1="34" x2="508" y2="212"/>
+        <line x1="594" y1="34" x2="594" y2="212"/><line x1="680" y1="34" x2="680" y2="212"/>
+      </g>
+      <g font-family="var(--mono)" font-size="10.5" fill="var(--ink-faint)" text-anchor="middle" letter-spacing="0.06em">
+        <text x="250" y="232">50%</text><text x="336" y="232">60%</text><text x="422" y="232">70%</text>
+        <text x="508" y="232">80%</text><text x="594" y="232">90%</text><text x="680" y="232">100%</text>
+      </g>
+      <!-- row 1: statistical significance agreement 75 -> 94 -->
+      <g class="hit" data-t="Statistical significance agreement" data-v="75% across all 32 · 94% across the closest 16">
+        <text x="234" y="66" text-anchor="end" font-size="14.5" fill="var(--ink)">Agree on statistical significance</text>
+        <line x1="465" y1="82" x2="628.4" y2="82" stroke="var(--mark-lo)" stroke-width="2" opacity=".55"/>
+        <circle cx="465" cy="82" r="6.5" fill="var(--mark-lo)" stroke="var(--navy2)" stroke-width="2"/>
+        <circle cx="628.4" cy="82" r="6.5" fill="var(--mark-hi)" stroke="var(--navy2)" stroke-width="2"/>
+        <text x="465" y="106" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-dim)">75</text>
+        <text x="628.4" y="106" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink)">94</text>
+        <rect x="250" y="62" width="430" height="40" fill="transparent"/>
+      </g>
+      <!-- row 2: estimate agreement 66 -> 88 -->
+      <g class="hit" data-t="Estimate agreement" data-v="66% across all 32 · 88% across the closest 16">
+        <text x="234" y="124" text-anchor="end" font-size="14.5" fill="var(--ink)">Agree on the size of the effect</text>
+        <line x1="387.6" y1="140" x2="576.8" y2="140" stroke="var(--mark-lo)" stroke-width="2" opacity=".55"/>
+        <circle cx="387.6" cy="140" r="6.5" fill="var(--mark-lo)" stroke="var(--navy2)" stroke-width="2"/>
+        <circle cx="576.8" cy="140" r="6.5" fill="var(--mark-hi)" stroke="var(--navy2)" stroke-width="2"/>
+        <text x="387.6" y="164" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-dim)">66</text>
+        <text x="576.8" y="164" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink)">88</text>
+        <rect x="250" y="120" width="430" height="40" fill="transparent"/>
+      </g>
+      <!-- row 3: standardized difference agreement 75 -> 88 -->
+      <g class="hit" data-t="Standardised difference agreement" data-v="75% across all 32 · 88% across the closest 16">
+        <text x="234" y="182" text-anchor="end" font-size="14.5" fill="var(--ink)">Differ only within chance</text>
+        <line x1="465" y1="198" x2="576.8" y2="198" stroke="var(--mark-lo)" stroke-width="2" opacity=".55"/>
+        <circle cx="465" cy="198" r="6.5" fill="var(--mark-lo)" stroke="var(--navy2)" stroke-width="2"/>
+        <circle cx="576.8" cy="198" r="6.5" fill="var(--mark-hi)" stroke="var(--navy2)" stroke-width="2"/>
+        <text x="465" y="222" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink-dim)">75</text>
+        <text x="576.8" y="222" text-anchor="middle" font-family="var(--mono)" font-size="11" fill="var(--ink)">88</text>
+        <rect x="250" y="178" width="430" height="40" fill="transparent"/>
+      </g>
+      <line x1="250" y1="212" x2="680" y2="212" stroke="var(--axis)" stroke-width="1"/>
+    </svg>
+    <button class="tblbtn" data-tbl="t1">Show the numbers</button>
+    <div class="dtable" id="t1"><div class="tw"><table>
+      <thead><tr><th>Agreement measure</th><th class="n">All 32</th><th class="n">Closest 16</th></tr></thead>
+      <tbody>
+        <tr><td>Agree on statistical significance</td><td class="n">75%</td><td class="n">94%</td></tr>
+        <tr><td>Agree on the size of the effect</td><td class="n">66%</td><td class="n">88%</td></tr>
+        <tr><td>Differ only within chance</td><td class="n">75%</td><td class="n">88%</td></tr>
+        <tr><td>Correlation of effect estimates</td><td class="n">0.82</td><td class="n">0.93</td></tr>
+      </tbody>
+    </table></div></div>
+    <figcaption>Wang et al., JAMA 2023, RCT-DUPLICATE. Axis begins at 50% because these are agreement proportions on a dot plot rather than magnitudes from zero. The sixteen closest emulations are a post-hoc subset, so read the right-hand state as what is achievable by design rather than as a second independent result.</figcaption>
+  </figure>
+
+  <div class="col">
+    <p>Read that chart the way your own mathematicians would. Nothing about the volume of data changed between the two states. The databases were the same size. What changed was whether the analysis could reproduce a trial's eligibility window, its starting point, its comparator and its outcome definition. Design discipline moved the answer from three quarters right to almost all right.</p>
+    <p>Which is the finding, and it supports you: real-world data can carry causal weight, and the peer-reviewed test of that proposition says so. It just does not say that more of it is what does the work.</p>
+  </div>
+</section>
+
+<section id="turns">
+  <div class="col">
+    <div class="eyebrow">04 · Where the same literature turns on you</div>
+    <h2>In the paper you would cite for the replication crisis, observational designs failed worst</h2>
+    <p>The Ioannidis paper is the one everybody quotes for the thirty-two per cent. It also contains a comparison that is rarely quoted, and it is the single hardest fact on this map.</p>
+  </div>
+
+  <figure>
+    <div class="ftitle">Highly cited clinical findings later contradicted or found to have been exaggerated</div>
+    <div class="fsub">Same paper, same period, same definition of failure, split by whether the original study randomised.</div>
+    <svg viewBox="0 0 720 168" role="img" aria-label="Bar chart: 83 percent of highly cited nonrandomized studies were contradicted or exaggerated, versus 23 percent of randomized trials">
+      <g stroke="var(--grid)" stroke-width="1">
+        <line x1="250" y1="20" x2="250" y2="130"/><line x1="336" y1="20" x2="336" y2="130"/>
+        <line x1="422" y1="20" x2="422" y2="130"/><line x1="508" y1="20" x2="508" y2="130"/>
+        <line x1="594" y1="20" x2="594" y2="130"/><line x1="680" y1="20" x2="680" y2="130"/>
+      </g>
+      <g class="hit" data-t="Nonrandomised designs" data-v="5 of 6 highly cited nonrandomised studies were contradicted or had initially stronger effects">
+        <text x="234" y="47" text-anchor="end" font-size="14.5" fill="var(--ink)">Nonrandomised</text>
+        <path d="M250 28 H602.9 A4 4 0 0 1 606.9 32 V56 A4 4 0 0 1 602.9 60 H250 Z" fill="var(--mark)"/>
+        <text x="620" y="49" font-family="var(--mono)" font-size="12.5" fill="var(--ink)">83%  ·  5 of 6</text>
+        <rect x="250" y="24" width="430" height="40" fill="transparent"/>
+      </g>
+      <g class="hit" data-t="Randomised trials" data-v="9 of 39 highly cited randomised trials were contradicted or had initially stronger effects">
+        <text x="234" y="105" text-anchor="end" font-size="14.5" fill="var(--ink)">Randomised</text>
+        <path d="M250 86 H344.9 A4 4 0 0 1 348.9 90 V114 A4 4 0 0 1 344.9 118 H250 Z" fill="var(--mark)"/>
+        <text x="362" y="107" font-family="var(--mono)" font-size="12.5" fill="var(--ink)">23%  ·  9 of 39</text>
+        <rect x="250" y="82" width="430" height="40" fill="transparent"/>
+      </g>
+      <line x1="250" y1="130" x2="680" y2="130" stroke="var(--axis)" stroke-width="1"/>
+      <g font-family="var(--mono)" font-size="10.5" fill="var(--ink-faint)" text-anchor="middle" letter-spacing="0.06em">
+        <text x="250" y="150">0%</text><text x="336" y="150">20%</text><text x="422" y="150">40%</text>
+        <text x="508" y="150">60%</text><text x="594" y="150">80%</text><text x="680" y="150">100%</text>
+      </g>
+    </svg>
+    <button class="tblbtn" data-tbl="t2">Show the numbers</button>
+    <div class="dtable" id="t2"><div class="tw"><table>
+      <thead><tr><th>Design</th><th class="n">Contradicted or exaggerated</th><th class="n">Total</th><th class="n">Share</th></tr></thead>
+      <tbody>
+        <tr><td>Nonrandomised</td><td class="n">5</td><td class="n">6</td><td class="n">83%</td></tr>
+        <tr><td>Randomised</td><td class="n">9</td><td class="n">39</td><td class="n">23%</td></tr>
+      </tbody>
+    </table></div></div>
+    <figcaption>Ioannidis, JAMA 2005, p = .008 for the difference. Only six nonrandomised studies were in the sample, so the proportion is imprecise. The direction is not, and the paper's own conclusion is that controversies are most common with highly cited nonrandomised studies.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h3>The named example is your design, at enormous scale</h3>
+    <p>The first contradicted finding listed in that paper is the Nurses' Health Study, a prospective cohort of real people using hormone therapy exactly as they chose to use it, reporting a forty-four per cent reduction in coronary events. It was one of the largest and most careful real-world cohorts ever assembled. The Women's Health Initiative then randomised the question and found increased cardiovascular risk. The Initiative's own observational arm agreed with the cohort and disagreed with its own trial arm, on the same participants, in the same study.</p>
+    <p>The explanation was not sloppiness. Women who chose hormone therapy were healthier before they started. That is healthy-user bias, and no volume of additional women would have found it.</p>
+    <p>The same pattern ran through supplements. Observational data supported beta-carotene, vitamin E, folate and B vitamins, and multivitamins for cardiovascular and cancer outcomes. Randomised trials returned null results or harm. The stated reason is that supplement users are healthier and wealthier than non-users and the difference resists statistical adjustment.</p>
+    <div class="panel warn">
+      <h4>Why this is the objection Ēnel specifically has to answer</h4>
+      <p>The population enrolling in a peptide study is affluent, health-attentive, training, sleeping, tracking, and spending money on itself. It is the healthy-user population in its purest available form, self-selected on exactly the traits that predict good outcomes. Whatever Ēnel measures will look like it worked, and the mechanism that produces that illusion has already fooled a generation of careful epidemiologists working with far larger cohorts than yours.</p>
+      <p>This is not an argument against the study. It is the reason the study needs a comparator group drawn from inside the same population rather than from outside it, and it is the single thing a reviewer will attack first.</p>
+    </div>
+  </div>
+</section>
+
+<section id="n">
+  <div class="col">
+    <div class="eyebrow">05 · The one place I will not move</div>
+    <h2>More data buys precision. It does not buy validity.</h2>
+    <p class="lede">This is arithmetic rather than opinion, and it is the part of your team's argument I think is wrong. Sample size shrinks the interval around an estimate. It does nothing to the bias in the estimate. A confounded effect measured on a million people is the same wrong number as a confounded effect measured on a thousand, reported with more confidence.</p>
+    <p>That makes scale actively dangerous in one specific way. A wide interval around a wrong answer invites scrutiny. A narrow interval around the same wrong answer looks like proof, gets published, gets quoted by every brand in the category, and is the thing Ēnel would eventually be corrected on in public. The Nurses' Health Study was not undone by being too small.</p>
+    <p>So when your mathematicians say a massive data dump is manageable, I agree completely, and it is not the objection. Handling volume is an engineering problem and they will solve it. Identifying a causal effect from data where people chose their own treatment is a design problem, and the size of the file has no bearing on it.</p>
+    <p class="pull">The claim I would defend is narrow: volume is what lets you cut many trustworthy comparisons out of one cohort. It is not what makes any single comparison trustworthy.</p>
+    <p>Which is, in fact, an argument for your massive study. Just for a different reason than the one being given.</p>
+  </div>
+</section>
+
+<section id="build">
+  <div class="col">
+    <div class="eyebrow">06 · What follows, concretely</div>
+    <h2>Enrol everyone, and collect for emulation</h2>
+    <p>The reconciliation is already in your own thesis, which names target trial emulation as the strongest rigour anchor available. That method is exactly what the RCT-DUPLICATE result measures, and it is what turns an open cohort into a machine that produces defensible comparisons rather than a testimonial archive.</p>
+    <p>It imposes almost nothing on the participant. It imposes a great deal on what gets recorded, and most of it cannot be added later.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>What emulation requires</th><th>What it means for the intake</th><th>Retrofittable?</th></tr></thead>
+    <tbody>
+      <tr><td>A defined start, the moment treatment begins</td><td>The exact date somebody started this compound, and whether this is their first ever course</td><td>No. This is the one field that cannot be recovered honestly after the fact.</td></tr>
+      <tr><td>An eligibility window before that start</td><td>What they were doing, taking and measuring in the weeks before they began</td><td>No, and it is what makes a before-and-after comparison mean anything.</td></tr>
+      <tr><td>A new-user design</td><td>Separating first-time users from people already years in, who are survivors by definition</td><td>Only if first-ever-use was recorded.</td></tr>
+      <tr><td>An active comparator</td><td>People in the same population who chose something else, or chose to wait, rather than the general public</td><td>Partly, if the cohort is broad enough to contain them, which is an argument for all-people.</td></tr>
+      <tr><td>Measured confounders</td><td>Training load, sleep, income band, prior health, other products, why they started</td><td>Poorly. Recalled baselines are the weakest data in any cohort.</td></tr>
+      <tr><td>Negative controls and sensitivity analysis</td><td>An outcome the compound could not plausibly move, plus a stated figure for how much unmeasured confounding would overturn the result</td><td>Yes, and it should be published beside every effect estimate.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="col">
+    <p>Note what this does to the all-people question. A broad, heterogeneous cohort is an advantage under this method, because the comparator has to come from inside the population and a narrow cohort will not contain one. So your instinct on breadth is right, and the reason is technical rather than promotional.</p>
+
+    <h3>Lead with the questions no trial can answer</h3>
+    <p>The strongest publications available to Ēnel in its first year are not effect estimates at all. They are the things a randomised trial structurally cannot produce, where observational data is not a weaker substitute but the only instrument that exists.</p>
+    <ul>
+      <li><strong>Why people stop.</strong> The discontinuation ledger, and specifically faded against never worked. No trial reports this because trials end on schedule.</li>
+      <li><strong>What people actually take.</strong> Real doses, real stacks, real duration. Every trial tests one compound at one dose in isolation, which is a condition that exists nowhere.</li>
+      <li><strong>Harms at scale in the people actually exposed.</strong> Trials are too small and too short to see them, and the exposed population here is not in any trial.</li>
+      <li><strong>Where it came from.</strong> Supply source and product tier, which nobody records and which may explain more variance than dose.</li>
+      <li><strong>Who never responds.</strong> Non-responders are averaged away in trials and are the most commercially important group in the market.</li>
+    </ul>
+    <p>Those five are unimpeachable. Publish them first, establish that Ēnel measures what nobody else measures, and let the effect estimates come out of emulated subsets afterward with their bias analysis attached. That order costs you nothing and makes the first attack on the method much harder to land.</p>
+  </div>
+</section>
+
+<section id="framing">
+  <div class="col">
+    <div class="eyebrow">07 · The framing I would fight you on</div>
+    <h2>Your thesis already says this better than the position does</h2>
+    <p>The line that the design has very little respect for studies done historically is the one thing here I would ask you to drop, and not because it is unfair. Two reasons, both practical.</p>
+    <p>First, it costs you the docket. The whole value of arriving in a federal rulemaking with evidence is that the evidence gets read and cited. A submission framed as a rejection of prior research gets filed and ignored, whatever is in it. The same data framed as a target trial emulation with an explicit bias analysis gets read by the reviewers who wrote that the evidence does not exist, and those reviewers are the audience.</p>
+    <p>Second, your own thesis has the better formulation already. Prior art is a quarry rather than a foundation. That is not deference. It says the old work is raw material you cut what you need from, which is exactly the relationship you are describing, and it does not hand a critic the sentence they will quote back at you.</p>
+    <div class="panel teal">
+      <h4>The strongest true version of your claim</h4>
+      <p>Most of what is believed about these compounds rests on animal work that does not replicate, and none of it describes what happens when real people use them in the combinations and doses they actually choose. Ēnel measures that. Where a causal claim is made, it is made from an emulated trial inside the cohort with the bias analysis published beside it. Where no such claim can be supported, Ēnel publishes what it observed and says so.</p>
+      <p>Everything in that paragraph is defensible in front of a reviewer, a regulator and a journalist, and none of it concedes a thing.</p>
+    </div>
+
+    <h3>One gap worth naming</h3>
+    <p>The board has mathematics and statistics in David Adams, machine learning in Asif Shakeel, and clinical judgment in Dr Dickinson and Dr Overcash. That is a strong bench and none of those is the specialty this argument turns on. Causal inference from observational data is its own discipline, and the person who writes an emulation protocol and a bias analysis is a pharmacoepidemiologist. Your thesis already embodies that expertise as a persona. One named holder of the seat would answer the objection in this section before it is raised, and it is the cheapest credibility available to the company right now.</p>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="col">
+    <div class="eyebrow">08 · Sources</div>
+    <h2>What the map rests on</h2>
+    <ul class="srclist">
+      <li><b>Preclinical replication.</b> <a href="https://www.nature.com/articles/483531a">Begley &amp; Ellis, Raise standards for preclinical cancer research, Nature 2012</a>, reporting 6 of 53 landmark studies replicated. Bayer's ~25% from <a href="https://trilogywriting.com/document/the-reproducibility-crisis-in-preclinical-research-lessons-to-learn-from-clinical-research/">Prinz et al. as summarised here</a>. The seven-year follow-up is <a href="https://elifesciences.org/articles/75830">Reproducibility in Cancer Biology, eLife 2021</a>.</li>
+      <li><b>Highly cited clinical research.</b> <a href="https://pubmed.ncbi.nlm.nih.gov/16014596/?dopt=Abstract">Ioannidis, Contradicted and initially stronger effects in highly cited clinical research, JAMA 2005;294:218-228</a>. Full text read for this note: 49 studies, 45 claiming effectiveness, 7 contradicted, 7 initially stronger, 20 replicated, 11 unchallenged, and 5 of 6 nonrandomised against 9 of 39 randomised at p = .008.</li>
+      <li><b>Real-world emulation of trials.</b> <a href="https://pubmed.ncbi.nlm.nih.gov/37097356/">Wang et al., Emulation of Randomized Clinical Trials With Nonrandomized Database Analyses: Results of 32 Clinical Trials, JAMA 2023</a>, with the agreement statistics as reported by <a href="https://news.aetion.com/rct-duplicate-published-jama">the initiative</a>. First results, ten trials, are <a href="https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.120.051718">Franklin et al., Circulation 2021</a>.</li>
+      <li><b>Hormone therapy, and observational against randomised inside one study.</b> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4595019/">Concordance of results from randomized and observational analyses within the Women's Health Initiative</a>, and <a href="https://academic.oup.com/humrep/article/18/11/2241/644070">the epidemiology-versus-trials debate that followed</a>.</li>
+      <li><b>Healthy-user bias.</b> <a href="https://catalogofbias.org/biases/healthy-user-bias/">Catalogue of Bias</a>, and the supplement-specific version in <a href="https://www.sciencedirect.com/topics/medicine-and-dentistry/healthy-user-bias">the overview literature</a>.</li>
+      <li><b>Peptide evidence state.</b> <a href="https://www.statnews.com/2026/02/03/bpc-157-peptide-science-safety-regulatory-questions/">STAT on BPC-157's claims and evidence</a>, and the July 2026 committee record in <a href="https://www.hklaw.com/en/insights/publications/2026/08/fda-advisory-committee-endorses-compounding-of-certain-peptides">Holland &amp; Knight</a>, where FDA reviewers wrote that there is a lack of evidence to evaluate effectiveness and safety.</li>
+      <li><b>Internal.</b> The Ēnel thesis, which already names target trial emulation as the rigour anchor and prior art as a quarry rather than a foundation; the beachhead review and its companion of 17 August; council records CR-2026-08-16-01 and CR-2026-08-17-01.</li>
+    </ul>
+    <p class="note">Figures in the two charts are transcribed from the cited papers. Where a share is derived rather than printed in the source, the derivation is shown in the data table beside the figure.</p>
+  </div>
+</section>
+
+<footer><div class="col">
+  <p>Ēnel Health, internal. 17 August 2026. Third in the series, after `Enel_Beachhead_Review.html` and `Enel_Beachhead_Review_II.html`, both kept unedited.</p>
+</div></footer>
+
+</div>
+
+<script>
+  var t=document.getElementById('tgl');
+  function setTheme(m){document.documentElement.setAttribute('data-theme',m);t.textContent=m==='dark'?'Light':'Dark';try{localStorage.setItem('enel-theme',m)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('enel-theme')}catch(e){}
+  setTheme(saved||'dark');
+  t.addEventListener('click',function(){setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')});
+
+  document.querySelectorAll('.tblbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var d=document.getElementById(b.dataset.tbl);
+      d.classList.toggle('on');
+      b.textContent=d.classList.contains('on')?'Hide the numbers':'Show the numbers';
+    });
+  });
+
+  var tip=document.getElementById('tip');
+  document.querySelectorAll('.hit').forEach(function(g){
+    g.addEventListener('mousemove',function(e){
+      tip.innerHTML='<b>'+g.dataset.t+'</b>'+g.dataset.v;
+      tip.style.opacity=1;
+      var x=e.clientX+14,y=e.clientY+14;
+      if(x+260>window.innerWidth)x=e.clientX-260;
+      tip.style.left=x+'px';tip.style.top=y+'px';
+    });
+    g.addEventListener('mouseleave',function(){tip.style.opacity=0});
+  });
+</script>
+</body>
+</html>
